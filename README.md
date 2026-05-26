@@ -1,4 +1,4 @@
-# 🧪 webdev-lab
+# 🧪 WebDev-lab
 
 An elegant, highly visual, and comprehensive web development learning toolkit. This repository serves as a hands-on, production-grade sandbox for practically implementing and exploring the core fundamentals of HTML5 and CSS3. It transitions methodically from foundational typography rules to advanced, state-of-the-art browser layout architectures.
 
