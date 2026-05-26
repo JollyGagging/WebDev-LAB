@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 04 — Images & Video | WebDev Lab</title>
+  <meta name="description" content="Learn to insert, style, and control images and video in HTML — object-fit, filters, responsive images, video attributes, and aspect ratio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/labs.css">
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <a href="../index.html" class="nav-logo">WebDev<span>Lab</span></a>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="01-typography.html">Typography</a></li>
+      <li><a href="02-boxmodel.html">Box Model</a></li>
+      <li><a href="03-layouts.html">Layouts</a></li>
+      <li><a href="04-media.html" class="active">Media</a></li>
+      <li><a href="05-animations.html">Animations</a></li>
+      <li><a href="06-seo.html">SEO</a></li>
+      <li><a href="07-advanced.html">Advanced CSS</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-hero">
+    <div class="hero-tag">Module 04</div>
+    <h1>Images<br><em>&amp; Video</em></h1>
+    <p>Insert images, swap them out, control how they fit their containers, apply filters, work with aspect ratios, and embed video with full playback control.</p>
+  </header>
+
+  <main class="lab-container">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">›</span>
+      <a href="03-layouts.html">Layouts</a>
+      <span class="sep">›</span>
+      <span>Media</span>
+    </nav>
+
+    <!-- ===== 4.1 INSERTING AN IMAGE ===== -->
+    <section aria-labelledby="img-insert-heading">
+      <div class="section-header">
+        <p class="section-num">4.1</p>
+        <h2 id="img-insert-heading">Inserting an Image</h2>
+        <p>The <code>&lt;img&gt;</code> tag is self-closing. Always include <code>alt</code> text for accessibility and SEO. Use relative paths for local images.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">🖼️</span>
+          <h3>The &lt;img&gt; Tag</h3>
+          <span class="card-tag">img · alt · src</span>
+        </div>
+        <div class="lab-card-body">
+
+          <div class="callout callout-tip">
+            <span class="callout-icon">✏️</span>
+            <div><strong>To change the image:</strong> Replace the <code>src</code> URL in the HTML below with any image URL or relative path to a file in your project folder (e.g. <code>src="../assets/my-photo.jpg"</code>).</div>
+          </div>
+
+          <div class="output-zone">
+            <!-- 🔧 PRACTICE: Change src to any image URL or local path -->
+            <img
+              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80"
+              alt="A developer's laptop with code on screen"
+              width="600"
+              height="400"
+              style="border-radius: var(--r-md); max-width: 100%;"
+              loading="lazy"
+            >
+            <p style="margin-top: var(--s3); font-size: 0.85rem; color: var(--muted);">Photo from Unsplash — change the src to swap this out!</p>
+          </div>
+
+          <pre>&lt;!-- Minimum required --&gt;
+&lt;img src="photo.jpg" alt="Description of image"&gt;
+
+&lt;!-- Full best practice --&gt;
+&lt;img
+  src="https://example.com/photo.jpg"
+  alt="A developer's laptop with code on screen"
+  width="600"     &lt;!-- prevents CLS (see Module 06) --&gt;
+  height="400"    &lt;!-- prevents CLS --&gt;
+  loading="lazy"  &lt;!-- only loads when visible --&gt;
+&gt;
+
+&lt;!-- Local file paths --&gt;
+&lt;img src="./images/hero.jpg" alt="Hero image"&gt;
+&lt;img src="../assets/logo.png" alt="Company logo"&gt;</pre>
+
+          <div class="callout callout-warn">
+            <span class="callout-icon">⚠️</span>
+            <div>Never leave <code>alt=""</code> empty on meaningful images — this hurts accessibility and SEO. Only leave it empty for purely decorative images.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 4.2 OBJECT-FIT ===== -->
+    <section aria-labelledby="objectfit-heading">
+      <div class="section-header">
+        <p class="section-num">4.2</p>
+        <h2 id="objectfit-heading">object-fit — Controlling How Images Fill Their Container</h2>
+        <p>When you give an image a fixed width AND height, <code>object-fit</code> controls how the image fills that box without distorting.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">📐</span>
+          <h3>object-fit Gallery</h3>
+          <span class="card-tag">object-fit</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--s5);">
+
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">object-fit: cover ✓ (most common)</code>
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&q=80" alt="Code" class="img-demo img-cover" style="border-radius: var(--r-md);">
+                <p style="font-size:0.8rem; color:var(--muted); margin-top: var(--s2);">Fills container, crops excess. No distortion.</p>
+              </div>
+
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">object-fit: contain</code>
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&q=80" alt="Code" class="img-demo img-contain" style="border-radius: var(--r-md);">
+                <p style="font-size:0.8rem; color:var(--muted); margin-top: var(--s2);">Shows entire image, may leave gaps.</p>
+              </div>
+
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">object-fit: fill (distorts!)</code>
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&q=80" alt="Code" class="img-demo img-fill" style="border-radius: var(--r-md);">
+                <p style="font-size:0.8rem; color:var(--muted); margin-top: var(--s2);">Stretches to fill. Usually avoid this.</p>
+              </div>
+
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">object-fit: scale-down</code>
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&q=80" alt="Code" class="img-demo img-scale" style="border-radius: var(--r-md);">
+                <p style="font-size:0.8rem; color:var(--muted); margin-top: var(--s2);">Smaller of "none" or "contain".</p>
+              </div>
+
+            </div>
+          </div>
+
+          <pre>/* Always use cover for thumbnails, cards, hero images */
+.card-thumbnail {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+
+  /* Control focal point */
+  object-position: center center; /* default */
+  object-position: top;           /* show top of image */
+  object-position: 30% 20%;       /* custom position */
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 4.3 IMAGE FILTERS ===== -->
+    <section aria-labelledby="filter-heading">
+      <div class="section-header">
+        <p class="section-num">4.3</p>
+        <h2 id="filter-heading">CSS Image Filters</h2>
+        <p>The <code>filter</code> property applies visual effects like grayscale, blur, brightness, contrast, hue, and more — all in CSS.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">🎨</span>
+          <h3>Filter Gallery</h3>
+          <span class="card-tag">filter</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--s4);">
+              <div>
+                <code style="font-size:0.7rem; display:block; margin-bottom:var(--s2);">filter: none</code>
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&q=80" alt="Laptop" class="img-filter-none" style="width:100%; height:120px; object-fit:cover; border-radius:6px;">
+              </div>
+              <div>
+                <code style="font-size:0.7rem; display:block; margin-bottom:var(--s2);">grayscale(100%)</code>
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&q=80" alt="Laptop" class="img-filter-gray" style="width:100%; height:120px; object-fit:cover; border-radius:6px;">
+              </div>
+              <div>
+                <code style="font-size:0.7rem; display:block; margin-bottom:var(--s2);">sepia(80%)</code>
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&q=80" alt="Laptop" class="img-filter-sepia" style="width:100%; height:120px; object-fit:cover; border-radius:6px;">
+              </div>
+              <div>
+                <code style="font-size:0.7rem; display:block; margin-bottom:var(--s2);">blur(3px)</code>
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&q=80" alt="Laptop" class="img-filter-blur" style="width:100%; height:120px; object-fit:cover; border-radius:6px;">
+              </div>
+              <div>
+                <code style="font-size:0.7rem; display:block; margin-bottom:var(--s2);">brightness(1.5)</code>
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&q=80" alt="Laptop" class="img-filter-bright" style="width:100%; height:120px; object-fit:cover; border-radius:6px;">
+              </div>
+              <div>
+                <code style="font-size:0.7rem; display:block; margin-bottom:var(--s2);">contrast(200%)</code>
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&q=80" alt="Laptop" class="img-filter-contrast" style="width:100%; height:120px; object-fit:cover; border-radius:6px;">
+              </div>
+              <div>
+                <code style="font-size:0.7rem; display:block; margin-bottom:var(--s2);">hue-rotate(180deg)</code>
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&q=80" alt="Laptop" class="img-filter-hue" style="width:100%; height:120px; object-fit:cover; border-radius:6px;">
+              </div>
+              <div>
+                <code style="font-size:0.7rem; display:block; margin-bottom:var(--s2);">saturate(300%)</code>
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&q=80" alt="Laptop" class="img-filter-saturate" style="width:100%; height:120px; object-fit:cover; border-radius:6px;">
+              </div>
+              <div>
+                <code style="font-size:0.7rem; display:block; margin-bottom:var(--s2);">invert(100%)</code>
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&q=80" alt="Laptop" class="img-filter-invert" style="width:100%; height:120px; object-fit:cover; border-radius:6px;">
+              </div>
+              <div>
+                <code style="font-size:0.7rem; display:block; margin-bottom:var(--s2);">contrast + saturate combo</code>
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&q=80" alt="Laptop" class="img-filter-combo" style="width:100%; height:120px; object-fit:cover; border-radius:6px;">
+              </div>
+            </div>
+          </div>
+          <pre>/* Single filter */
+filter: grayscale(100%);
+filter: blur(4px);
+filter: brightness(0.8);   /* < 1 = darker, > 1 = brighter */
+filter: contrast(150%);
+filter: hue-rotate(90deg);
+filter: saturate(200%);
+filter: sepia(60%);
+filter: invert(100%);
+filter: opacity(50%);      /* same as opacity property */
+filter: drop-shadow(2px 2px 4px black); /* respects transparency! */
+
+/* Combine multiple filters */
+filter: contrast(1.1) brightness(1.05) saturate(1.2);</pre>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 4.4 IMAGE SHAPES ===== -->
+    <section aria-labelledby="imgshapes-heading">
+      <div class="section-header">
+        <p class="section-num">4.4</p>
+        <h2 id="imgshapes-heading">Image Shapes with clip-path &amp; border-radius</h2>
+      </div>
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">✂️</span>
+          <h3>Clip-Path Image Shapes</h3>
+          <span class="card-tag">clip-path · border-radius</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <div style="display: flex; gap: var(--s6); flex-wrap: wrap; align-items: center; padding: var(--s4);">
+              <div style="text-align:center;">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="Portrait" class="img-circle">
+                <p style="font-family:var(--font-mono); font-size:0.72rem; color:var(--muted); margin-top:var(--s2);">border-radius: 50%</p>
+              </div>
+              <div style="text-align:center;">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="Portrait" class="img-hex">
+                <p style="font-family:var(--font-mono); font-size:0.72rem; color:var(--muted); margin-top:var(--s2);">hexagon</p>
+              </div>
+              <div style="text-align:center;">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="Portrait" class="img-diamond">
+                <p style="font-family:var(--font-mono); font-size:0.72rem; color:var(--muted); margin-top:var(--s2);">diamond</p>
+              </div>
+              <div style="text-align:center;">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="Portrait" class="img-triangle">
+                <p style="font-family:var(--font-mono); font-size:0.72rem; color:var(--muted); margin-top:var(--s2);">triangle</p>
+              </div>
+              <div style="text-align:center;">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="Portrait" style="width:120px; height:120px; object-fit:cover; clip-path: circle(40%); ">
+                <p style="font-family:var(--font-mono); font-size:0.72rem; color:var(--muted); margin-top:var(--s2);">circle(40%)</p>
+              </div>
+              <div style="text-align:center;">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="Portrait" style="width:120px; height:120px; object-fit:cover; clip-path: ellipse(55% 40% at 50% 50%);">
+                <p style="font-family:var(--font-mono); font-size:0.72rem; color:var(--muted); margin-top:var(--s2);">ellipse</p>
+              </div>
+              <div style="text-align:center;">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="Portrait" style="width:120px; height:120px; object-fit:cover; clip-path: inset(10px 20px round 20px);">
+                <p style="font-family:var(--font-mono); font-size:0.72rem; color:var(--muted); margin-top:var(--s2);">inset()</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 4.5 VIDEO ===== -->
+    <section aria-labelledby="video-heading">
+      <div class="section-header">
+        <p class="section-num">4.5</p>
+        <h2 id="video-heading">HTML Video</h2>
+        <p>The <code>&lt;video&gt;</code> element embeds video directly. Key attributes: <code>controls</code>, <code>autoplay</code>, <code>muted</code>, <code>loop</code>, <code>poster</code>. Always include multiple <code>&lt;source&gt;</code> formats.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">▶️</span>
+          <h3>Native HTML Video — All Attributes Explained</h3>
+          <span class="card-tag">video · controls · autoplay · loop</span>
+        </div>
+        <div class="lab-card-body">
+
+          <!-- Example 1: Standard controls video -->
+          <p style="font-weight:700; margin-bottom:var(--s3);">Example 1: Standard video with controls</p>
+          <div class="output-zone">
+            <!-- 🔧 PRACTICE: Replace src with your own video file path -->
+            <video
+              controls
+              width="100%"
+              style="border-radius: var(--r-md);"
+              poster="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80"
+            >
+              <!-- Replace these src with your own video files -->
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+              <p>Your browser doesn't support HTML5 video. <a href="https://www.w3schools.com/html/mov_bbb.mp4">Download the video</a>.</p>
+            </video>
+          </div>
+
+          <!-- Example 2: Autoplay muted loop (background video) -->
+          <p style="font-weight:700; margin-bottom:var(--s3); margin-top: var(--s5);">Example 2: Autoplay + muted + loop (background video pattern)</p>
+          <div class="output-zone">
+            <video
+              autoplay
+              muted
+              loop
+              playsinline
+              width="100%"
+              style="border-radius: var(--r-md); max-height: 200px; object-fit:cover;"
+            >
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            </video>
+            <p style="font-size:0.82rem; color:var(--muted); margin-top:var(--s2);">Autoplays, muted, loops infinitely. Add <code>playsinline</code> for iOS.</p>
+          </div>
+
+          <pre>&lt;!-- Standard video with controls --&gt;
+&lt;video controls width="100%" poster="thumbnail.jpg"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  &lt;source src="video.webm" type="video/webm"&gt;
+  Your browser doesn't support video.
+&lt;/video&gt;
+
+&lt;!-- Background video (autoplay must be muted in browsers) --&gt;
+&lt;video autoplay muted loop playsinline&gt;
+  &lt;source src="bg-video.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+
+&lt;!-- Attributes reference --&gt;
+controls     → shows browser play/pause/volume UI
+autoplay     → starts playing immediately (must be muted)
+muted        → no audio (required for autoplay)
+loop         → replays when finished
+playsinline  → plays inline on iOS (not fullscreen)
+poster       → image shown before video plays
+preload      → "auto" | "metadata" | "none"
+width/height → size (or use CSS)</pre>
+
+        </div>
+      </div>
+
+      <!-- YouTube Embed -->
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">📺</span>
+          <h3>Embedding YouTube / Vimeo with iframe</h3>
+          <span class="card-tag">iframe · aspect-ratio</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="callout callout-tip">
+            <span class="callout-icon">✏️</span>
+            <div>Replace <code>dQw4w9WgXcQ</code> with any YouTube video ID to change the video.</div>
+          </div>
+          <div class="output-zone">
+            <!-- Responsive 16:9 wrapper using aspect-ratio -->
+            <div style="aspect-ratio: 16/9; border-radius: var(--r-md); overflow: hidden;">
+              <!-- 🔧 PRACTICE: Replace video ID in the src URL -->
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"
+                title="YouTube video"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+          <pre>&lt;!-- Responsive YouTube embed — the modern way --&gt;
+&lt;div style="aspect-ratio: 16/9;"&gt;
+  &lt;iframe
+    width="100%"
+    height="100%"
+    src="https://www.youtube.com/embed/VIDEO_ID"
+    title="Video title"
+    frameborder="0"
+    allowfullscreen
+    loading="lazy"
+  &gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;!-- aspect-ratio keeps 16:9 at any width — no padding hack needed --&gt;
+
+&lt;!-- Old padding-bottom hack (still works but less clean) --&gt;
+&lt;div style="position:relative; padding-bottom:56.25%; height:0;"&gt;
+  &lt;iframe style="position:absolute; top:0; left:0; width:100%; height:100%;" ...&gt;&lt;/iframe&gt;
+&lt;/div&gt;</pre>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 4.6 ASPECT RATIO ===== -->
+    <section aria-labelledby="aspectratio-heading">
+      <div class="section-header">
+        <p class="section-num">4.6</p>
+        <h2 id="aspectratio-heading">aspect-ratio — The Modern Way</h2>
+        <p>The <code>aspect-ratio</code> property maintains proportions automatically. Essential for responsive images, video wrappers, and square thumbnails.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">📏</span>
+          <h3>aspect-ratio Demos</h3>
+          <span class="card-tag">aspect-ratio</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--s4);">
+              <div>
+                <code style="font-size:0.72rem; display:block; margin-bottom:var(--s2);">aspect-ratio: 1/1 (square)</code>
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300&q=80" alt="Code" style="width:100%; aspect-ratio: 1/1; object-fit: cover; border-radius: var(--r-md);">
+              </div>
+              <div>
+                <code style="font-size:0.72rem; display:block; margin-bottom:var(--s2);">aspect-ratio: 16/9 (video)</code>
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300&q=80" alt="Code" style="width:100%; aspect-ratio: 16/9; object-fit: cover; border-radius: var(--r-md);">
+              </div>
+              <div>
+                <code style="font-size:0.72rem; display:block; margin-bottom:var(--s2);">aspect-ratio: 4/3 (classic)</code>
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300&q=80" alt="Code" style="width:100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--r-md);">
+              </div>
+              <div>
+                <code style="font-size:0.72rem; display:block; margin-bottom:var(--s2);">aspect-ratio: 3/4 (portrait)</code>
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300&q=80" alt="Code" style="width:100%; aspect-ratio: 3/4; object-fit: cover; border-radius: var(--r-md);">
+              </div>
+              <div>
+                <code style="font-size:0.72rem; display:block; margin-bottom:var(--s2);">aspect-ratio: 21/9 (cinematic)</code>
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300&q=80" alt="Code" style="width:100%; aspect-ratio: 21/9; object-fit: cover; border-radius: var(--r-md); grid-column: span 2;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prev / Next -->
+    <div style="display: flex; justify-content: space-between; margin-top: var(--s8);">
+      <a href="03-layouts.html" style="display:inline-flex; align-items:center; gap: var(--s3); background: #f0f0ec; color: var(--ink); padding: var(--s3) var(--s5); border-radius: var(--r-full); font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; text-decoration: none;">← Layouts</a>
+      <a href="05-animations.html" style="display:inline-flex; align-items:center; gap: var(--s3); background: var(--ink); color: var(--paper); padding: var(--s3) var(--s5); border-radius: var(--r-full); font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; text-decoration: none;">Next: Animations →</a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <p><strong>WebDev Lab</strong> — Module 04: Images &amp; Video</p>
+    <p style="margin-top:0.5rem;"><a href="../index.html">← Back to all modules</a></p>
+  </footer>
+
+</body>
+</html>

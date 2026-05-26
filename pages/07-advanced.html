@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>07 — Advanced CSS | WebDev Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/labs.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="../index.html" class="nav-logo">WebDev<span>Lab</span></a>
+    <div class="nav-links">
+      <a href="01-typography.html">Typography</a>
+      <a href="02-boxmodel.html">Box Model</a>
+      <a href="03-layouts.html">Layouts</a>
+      <a href="04-media.html">Media</a>
+      <a href="05-animations.html">Animations</a>
+      <a href="06-seo.html">SEO</a>
+      <a href="07-advanced.html" class="active">Advanced</a>
+      <a href="08-responsive.html">Responsive</a>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <span>Module 07</span></div>
+    <div class="hero-label">Module 07</div>
+    <h1>Advanced <em>CSS</em></h1>
+    <p>CSS custom properties, pseudo-elements, specificity wars, CSS shapes, counters, scroll effects, and dark mode — the techniques that separate junior devs from seniors.</p>
+  </header>
+
+  <main class="page-content">
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 1: CSS CUSTOM PROPERTIES
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2>CSS Custom Properties (Variables)</h2>
+      </div>
+      <p>CSS variables let you store values once and reuse them everywhere. Change one line to retheme your entire site. They cascade and inherit just like other CSS properties.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Declaring and Using Variables</div>
+        <div class="lab-card-body">
+          <div class="code-block">
+<pre><code>/* Declare in :root to make globally available */
+:root {
+  --primary: #e8401c;
+  --secondary: #1c6fe8;
+  --text: #0d0d0d;
+  --bg: #f5f2eb;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --radius: 8px;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+/* Use with var() */
+.card {
+  background: var(--bg);
+  color: var(--text);
+  padding: var(--space-md);
+  border-radius: var(--radius);
+}
+
+/* var() fallback (if variable isn't defined) */
+.button {
+  background: var(--accent, #333); /* #333 is fallback */
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">✏️ Practice — Live Theme Switch</div>
+        <div class="lab-card-body practice-zone">
+          <p>Change the <code>--cssvar-accent</code> value in <code>labs.css</code> to any color. Watch both the card and the button update instantly — that's the power of CSS variables.</p>
+          <div class="output-zone">
+            <div class="cssvar-demo">
+              <div class="cssvar-card">
+                <h3>Theme Card</h3>
+                <p>My border and button background both use <code>--cssvar-accent</code>.</p>
+                <div class="cssvar-btn">Themed Button</div>
+              </div>
+            </div>
+          </div>
+          <div class="code-block">
+<pre><code>/* In labs.css — find this block */
+.cssvar-demo {
+  --cssvar-accent: #e8401c; /* ← Change to any color! */
+}
+.cssvar-card {
+  border: 3px solid var(--cssvar-accent);
+}
+.cssvar-btn {
+  background: var(--cssvar-accent);
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Local Scope — Override Per Component</div>
+        <div class="lab-card-body">
+          <p>Variables can be redefined within a component, overriding the global value just for that subtree.</p>
+          <div class="code-block">
+<pre><code>:root { --card-border: #ddd; }
+
+/* Override locally */
+.danger-card {
+  --card-border: #e8401c; /* Only applies inside .danger-card */
+}
+.card {
+  border: 2px solid var(--card-border);
+}</code></pre>
+          </div>
+          <div class="local-scope-demo">
+            <div class="scope-card scope-default">Default Card</div>
+            <div class="scope-card scope-danger">Danger Card</div>
+            <div class="scope-card scope-success">Success Card</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 2: PSEUDO-CLASSES
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2>Pseudo-Classes</h2>
+      </div>
+      <p>Pseudo-classes select elements based on state or position — not just their HTML attributes. The colon syntax: <code>:pseudo-class</code>.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">State Pseudo-Classes</div>
+        <div class="lab-card-body">
+          <div class="pseudo-state-grid">
+            <div class="ps-item">
+              <code>:hover</code>
+              <div class="ps-demo ps-hover-demo">Hover me</div>
+            </div>
+            <div class="ps-item">
+              <code>:focus</code>
+              <div class="ps-demo ps-focus-demo"><input type="text" placeholder="Click to focus"></div>
+            </div>
+            <div class="ps-item">
+              <code>:active</code>
+              <div class="ps-demo ps-active-demo">Click &amp; hold</div>
+            </div>
+            <div class="ps-item">
+              <code>:visited</code>
+              <div class="ps-demo"><a href="#" class="ps-visited-demo">Visited link</a></div>
+            </div>
+            <div class="ps-item">
+              <code>:disabled</code>
+              <div class="ps-demo"><button disabled class="ps-disabled-demo">Disabled</button></div>
+            </div>
+            <div class="ps-item">
+              <code>:checked</code>
+              <div class="ps-demo"><label><input type="checkbox" class="ps-checked-demo"> Check me</label></div>
+            </div>
+            <div class="ps-item">
+              <code>:placeholder-shown</code>
+              <div class="ps-demo"><input type="text" placeholder="Has placeholder" class="ps-placeholder-demo"></div>
+            </div>
+            <div class="ps-item">
+              <code>:empty</code>
+              <div class="ps-demo ps-empty-target"><div class="ps-empty-demo"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Structural Pseudo-Classes</div>
+        <div class="lab-card-body">
+          <p>Select elements based on their position among siblings.</p>
+          <div class="structural-demo">
+            <div class="sd-item sd-first-child">first-child</div>
+            <div class="sd-item">2nd</div>
+            <div class="sd-item sd-nth-child">3rd (nth-child(3))</div>
+            <div class="sd-item sd-even">4th (nth-child(even))</div>
+            <div class="sd-item">5th</div>
+            <div class="sd-item sd-even">6th (nth-child(even))</div>
+            <div class="sd-item sd-nth-child">7th (nth-child(3n+1))</div>
+            <div class="sd-item">8th</div>
+            <div class="sd-item">9th</div>
+            <div class="sd-item sd-last-child">last-child</div>
+          </div>
+          <div class="code-block">
+<pre><code>li:first-child   { /* first item */ }
+li:last-child    { /* last item */ }
+li:nth-child(2)  { /* exactly 2nd item */ }
+li:nth-child(even)   { /* 2, 4, 6, 8... */ }
+li:nth-child(odd)    { /* 1, 3, 5, 7... */ }
+li:nth-child(3n)     { /* every 3rd */ }
+li:nth-child(3n+1)   { /* 1st, 4th, 7th, 10th... */ }
+li:not(.disabled)    { /* all except .disabled */ }
+li:not(:last-child)  { /* all except last */ }</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 3: PSEUDO-ELEMENTS
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2>Pseudo-Elements — ::before &amp; ::after</h2>
+      </div>
+      <p>Pseudo-elements (<code>::before</code>, <code>::after</code>) insert virtual elements into the DOM via CSS, without adding extra HTML. They must have <code>content: ""</code> to render.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">::before and ::after Techniques</div>
+        <div class="lab-card-body">
+          <div class="pseudo-gallery">
+            <div class="pseudo-demo-item">
+              <div class="pe-decorative-quote">"The best way to learn is by doing."</div>
+              <code>::before for decorative quote mark</code>
+            </div>
+            <div class="pseudo-demo-item">
+              <div class="pe-badge">New Feature</div>
+              <code>::after for tooltip/badge</code>
+            </div>
+            <div class="pseudo-demo-item">
+              <div class="pe-underline-link"><a href="#">Hover this link</a></div>
+              <code>::after for animated underline</code>
+            </div>
+            <div class="pseudo-demo-item">
+              <div class="pe-overlay-card">
+                <div class="pe-overlay-image"></div>
+                <span>Hover for overlay</span>
+              </div>
+              <code>::before for image overlay</code>
+            </div>
+            <div class="pseudo-demo-item">
+              <div class="pe-required-label">Email Address</div>
+              <code>::after for required asterisk</code>
+            </div>
+            <div class="pseudo-demo-item">
+              <div class="pe-tag-left">New</div>
+              <code>::before for ribbon/tag</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">✏️ Practice — Add a Decorative ::before</div>
+        <div class="lab-card-body practice-zone">
+          <p>Add a left-border accent to <code>.practice-pseudo-card</code> using <code>::before</code> in <code>labs.css</code>.</p>
+          <div class="output-zone">
+            <div class="practice-pseudo-card">
+              This card should have a colored accent bar on the left. Add it with ::before!
+            </div>
+          </div>
+          <div class="code-block">
+<pre><code>.practice-pseudo-card {
+  position: relative;
+  padding: 16px 16px 16px 24px;
+  background: #f9f9f9;
+  /* We need position: relative so ::before can be absolute */
+}
+.practice-pseudo-card::before {
+  content: ""; /* ← Required! Even if empty */
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px; /* ← Try changing the width */
+  background: var(--accent); /* ← Try changing the color */
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 4: CSS SPECIFICITY
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2>CSS Specificity</h2>
+      </div>
+      <p>When multiple CSS rules target the same element, the browser needs to decide which one wins. That's specificity — a numeric score calculated from your selector.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Specificity Score Chart</div>
+        <div class="lab-card-body">
+          <div class="specificity-chart">
+            <div class="spec-row">
+              <div class="spec-score">0,0,0,1</div>
+              <div class="spec-selector"><code>p</code> <code>div</code> <code>span</code></div>
+              <div class="spec-type">Element / Pseudo-element</div>
+              <div class="spec-bar" style="width: 5%"></div>
+            </div>
+            <div class="spec-row">
+              <div class="spec-score">0,0,1,0</div>
+              <div class="spec-selector"><code>.class</code> <code>[attr]</code> <code>:hover</code></div>
+              <div class="spec-type">Class / Attribute / Pseudo-class</div>
+              <div class="spec-bar" style="width: 25%"></div>
+            </div>
+            <div class="spec-row">
+              <div class="spec-score">0,1,0,0</div>
+              <div class="spec-selector"><code>#id</code></div>
+              <div class="spec-type">ID selector</div>
+              <div class="spec-bar" style="width: 55%"></div>
+            </div>
+            <div class="spec-row">
+              <div class="spec-score">1,0,0,0</div>
+              <div class="spec-selector"><code>style=""</code></div>
+              <div class="spec-type">Inline style</div>
+              <div class="spec-bar" style="width: 80%"></div>
+            </div>
+            <div class="spec-row">
+              <div class="spec-score">∞</div>
+              <div class="spec-selector"><code>!important</code></div>
+              <div class="spec-type">Nuclear option — overrides everything</div>
+              <div class="spec-bar spec-bar-danger" style="width: 100%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Specificity in Practice</div>
+        <div class="lab-card-body">
+          <div class="code-block">
+<pre><code>/* Specificity: 0,0,0,1 — element */
+p { color: black; }
+
+/* Specificity: 0,0,1,0 — class */
+.highlight { color: blue; }
+
+/* Specificity: 0,0,1,1 — class + element */
+p.highlight { color: green; }
+
+/* Specificity: 0,1,0,0 — ID */
+#special { color: red; }
+
+/* 0,1,1,1 — ID + class + element */
+#special p.highlight { color: purple; }
+
+/* The box below: which rule wins? */</code></pre>
+          </div>
+          <div class="specificity-battle">
+            <div class="spec-battle-box sb-element">
+              I am a <code>p</code> (0,0,0,1)
+            </div>
+            <div class="spec-battle-box sb-class highlight-spec">
+              I have <code>.highlight</code> (0,0,1,0) — wins!
+            </div>
+            <div class="spec-battle-box sb-id" id="spec-id-demo">
+              I have <code>#id</code> (0,1,0,0) — wins!
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 5: CSS SHAPES
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2>CSS Shapes</h2>
+      </div>
+      <p>You can draw complex shapes in pure CSS using borders, clip-path, and careful sizing. No images or SVGs needed.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Pure CSS Shape Gallery</div>
+        <div class="lab-card-body">
+          <div class="shapes-gallery">
+            <div class="shape-item">
+              <div class="shape-demo shape-circle"></div>
+              <code>circle</code>
+            </div>
+            <div class="shape-item">
+              <div class="shape-demo shape-square"></div>
+              <code>square</code>
+            </div>
+            <div class="shape-item">
+              <div class="shape-demo shape-rect"></div>
+              <code>rectangle</code>
+            </div>
+            <div class="shape-item">
+              <div class="shape-demo shape-triangle"></div>
+              <code>triangle</code>
+            </div>
+            <div class="shape-item">
+              <div class="shape-demo shape-pentagon"></div>
+              <code>pentagon</code>
+            </div>
+            <div class="shape-item">
+              <div class="shape-demo shape-hexagon"></div>
+              <code>hexagon</code>
+            </div>
+            <div class="shape-item">
+              <div class="shape-demo shape-star"></div>
+              <code>star</code>
+            </div>
+            <div class="shape-item">
+              <div class="shape-demo shape-arrow"></div>
+              <code>arrow</code>
+            </div>
+            <div class="shape-item">
+              <div class="shape-demo shape-cross"></div>
+              <code>cross</code>
+            </div>
+            <div class="shape-item">
+              <div class="shape-demo shape-pill"></div>
+              <code>pill</code>
+            </div>
+            <div class="shape-item">
+              <div class="shape-demo shape-parallelogram"></div>
+              <code>parallelogram</code>
+            </div>
+            <div class="shape-item">
+              <div class="shape-demo shape-diamond"></div>
+              <code>diamond</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Triangle Trick Explained</div>
+        <div class="lab-card-body">
+          <p>CSS triangles use a zero-size element with colored borders. Only one border is visible — the others are transparent.</p>
+          <div class="code-block">
+<pre><code>/* Triangle pointing up */
+.triangle-up {
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 50px solid red;
+}
+
+/* Triangle pointing right */
+.triangle-right {
+  width: 0;
+  height: 0;
+  border-top: 30px solid transparent;
+  border-bottom: 30px solid transparent;
+  border-left: 50px solid blue;
+}</code></pre>
+          </div>
+          <div class="triangle-explainer">
+            <div class="tri-explain-step">
+              <div class="tri-all-colored"></div>
+              <span>All borders visible</span>
+            </div>
+            <div class="tri-explain-arrow">→</div>
+            <div class="tri-explain-step">
+              <div class="tri-two-transparent"></div>
+              <span>Left/Right = transparent</span>
+            </div>
+            <div class="tri-explain-arrow">→</div>
+            <div class="tri-explain-step">
+              <div class="shape-triangle"></div>
+              <span>Triangle!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 6: CSS COUNTERS
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2>CSS Counters</h2>
+      </div>
+      <p>CSS counters let you automatically number elements without touching the HTML. Perfect for step-by-step guides, ordered sections, or custom lists.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">CSS Counter Demo</div>
+        <div class="lab-card-body">
+          <div class="css-counter-list">
+            <div class="css-counter-item">Getting Started</div>
+            <div class="css-counter-item">HTML Fundamentals</div>
+            <div class="css-counter-item">CSS Box Model</div>
+            <div class="css-counter-item">Flexbox Layouts</div>
+            <div class="css-counter-item">CSS Grid</div>
+          </div>
+          <div class="code-block">
+<pre><code>/* Create and use a CSS counter */
+.css-counter-list {
+  counter-reset: step-counter; /* Initialize counter */
+}
+.css-counter-item {
+  counter-increment: step-counter; /* Increment each item */
+}
+.css-counter-item::before {
+  content: counter(step-counter); /* Display the number */
+  /* Style the number however you want */
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 7: ADVANCED TOPICS
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <h2>More Advanced Techniques</h2>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">CSS :has() — The Parent Selector</div>
+        <div class="lab-card-body">
+          <p><code>:has()</code> is a game-changer — it lets you select a parent based on its children. Finally, a parent selector!</p>
+          <div class="code-block">
+<pre><code>/* Style a card if it contains an img */
+.card:has(img) {
+  padding: 0; /* Remove padding for image cards */
+}
+
+/* Style a form if it has an invalid input */
+.form:has(input:invalid) {
+  border-color: red;
+}
+
+/* Style a li if it has a nested ul */
+li:has(ul) > a {
+  font-weight: bold;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Cursor Styles</div>
+        <div class="lab-card-body">
+          <p>Hover over each box to see different cursor types. Small detail, big UX impact.</p>
+          <div class="cursor-grid">
+            <div class="cursor-demo cursor-default">default</div>
+            <div class="cursor-demo cursor-pointer">pointer</div>
+            <div class="cursor-demo cursor-text">text</div>
+            <div class="cursor-demo cursor-move">move</div>
+            <div class="cursor-demo cursor-grab">grab</div>
+            <div class="cursor-demo cursor-crosshair">crosshair</div>
+            <div class="cursor-demo cursor-not-allowed">not-allowed</div>
+            <div class="cursor-demo cursor-wait">wait</div>
+            <div class="cursor-demo cursor-zoom-in">zoom-in</div>
+            <div class="cursor-demo cursor-zoom-out">zoom-out</div>
+            <div class="cursor-demo cursor-help">help</div>
+            <div class="cursor-demo cursor-col-resize">col-resize</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Opacity vs Visibility vs Display</div>
+        <div class="lab-card-body">
+          <div class="vis-compare-grid">
+            <div class="vis-row vis-header">
+              <span>Property</span><span>Visible</span><span>Takes Space</span><span>Clickable</span><span>Animatable</span>
+            </div>
+            <div class="vis-row">
+              <code>display: none</code><span>❌</span><span>❌</span><span>❌</span><span>❌</span>
+            </div>
+            <div class="vis-row">
+              <code>visibility: hidden</code><span>❌</span><span>✅</span><span>❌</span><span>✅</span>
+            </div>
+            <div class="vis-row">
+              <code>opacity: 0</code><span>❌</span><span>✅</span><span>✅</span><span>✅</span>
+            </div>
+          </div>
+          <div class="code-block">
+<pre><code>/* Use case examples */
+
+/* Remove from layout entirely — no space reserved */
+.modal { display: none; }
+.modal.open { display: flex; }
+
+/* Keep space, animate in/out */
+.tooltip {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+.tooltip.visible {
+  opacity: 1;
+  visibility: visible;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Dark Mode with prefers-color-scheme</div>
+        <div class="lab-card-body">
+          <p>Detect and respond to the user's system dark mode preference — no JavaScript needed.</p>
+          <div class="code-block">
+<pre><code>:root {
+  --bg: #f5f2eb;
+  --text: #0d0d0d;
+  --card-bg: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d0d0d;
+    --text: #f5f2eb;
+    --card-bg: #1a1a1a;
+  }
+  /* All elements using var(--bg) and var(--text)
+     automatically switch! No selector changes needed. */
+}</code></pre>
+          </div>
+          <div class="dark-mode-preview">
+            <div class="dm-light-card">
+              <strong>Light Mode</strong>
+              <p>Dark text on light background</p>
+              <div class="dm-badge">Light</div>
+            </div>
+            <div class="dm-dark-card">
+              <strong>Dark Mode</strong>
+              <p>Light text on dark background</p>
+              <div class="dm-badge">Dark</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Scroll Snap</div>
+        <div class="lab-card-body">
+          <p>CSS Scroll Snap makes scrollable containers snap to defined positions — great for carousels, full-screen sections, or page sections. Pure CSS, no JS.</p>
+          <div class="code-block">
+<pre><code>/* Container */
+.scroll-container {
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  gap: 16px;
+}
+
+/* Each snapping child */
+.scroll-item {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 80%;
+}</code></pre>
+          </div>
+          <div class="scroll-demo-container">
+            <div class="scroll-demo-item si-1">Section 1 → scroll me</div>
+            <div class="scroll-demo-item si-2">Section 2</div>
+            <div class="scroll-demo-item si-3">Section 3</div>
+            <div class="scroll-demo-item si-4">Section 4</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">CSS Custom Properties — calc() Power</div>
+        <div class="lab-card-body">
+          <p>Combine <code>calc()</code> with custom properties for powerful, maintainable math-based layouts.</p>
+          <div class="code-block">
+<pre><code>:root {
+  --columns: 3;
+  --gap: 16px;
+}
+
+.grid-item {
+  /* Each item is 1/n of container minus gaps */
+  width: calc((100% - (var(--columns) - 1) * var(--gap)) / var(--columns));
+}
+
+/* Responsive: change just --columns */
+@media (max-width: 768px) {
+  :root { --columns: 2; }
+}
+@media (max-width: 480px) {
+  :root { --columns: 1; }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PREV / NEXT -->
+    <div class="page-nav">
+      <a href="06-seo.html" class="page-nav-btn prev">← Module 06: SEO</a>
+      <a href="08-responsive.html" class="page-nav-btn next">Module 08: Responsive →</a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>WebDev Lab — Built for learners, by a learner. Module 07 of 08.</p>
+  </footer>
+
+</body>
+</html>

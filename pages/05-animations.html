@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05 — Animations & Transitions | WebDev Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/labs.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="../index.html" class="nav-logo">WebDev<span>Lab</span></a>
+    <div class="nav-links">
+      <a href="01-typography.html">Typography</a>
+      <a href="02-boxmodel.html">Box Model</a>
+      <a href="03-layouts.html">Layouts</a>
+      <a href="04-media.html">Media</a>
+      <a href="05-animations.html" class="active">Animations</a>
+      <a href="06-seo.html">SEO</a>
+      <a href="07-advanced.html">Advanced</a>
+      <a href="08-responsive.html">Responsive</a>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <span>Module 05</span></div>
+    <div class="hero-label">Module 05</div>
+    <h1>Animations &amp; <em>Transitions</em></h1>
+    <p>Make things move. CSS transitions for smooth state changes, @keyframes for full animation sequences, and transforms for repositioning elements — all without a single line of JavaScript.</p>
+  </header>
+
+  <main class="page-content">
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 1: CSS TRANSITIONS
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2>CSS Transitions</h2>
+      </div>
+      <p>The <code>transition</code> property smoothly animates a CSS value from one state to another. It's most commonly triggered by <code>:hover</code>, <code>:focus</code>, or adding/removing a class.</p>
+
+      <div class="callout-info">
+        <strong>Syntax:</strong> <code>transition: property duration timing-function delay;</code><br>
+        Example: <code>transition: background-color 0.3s ease;</code>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Transition Properties</div>
+        <div class="lab-card-body">
+          <p>Hover over each box to see the transition in action. Each box transitions a different property.</p>
+          <div class="demo-row wrap-flex gap-16">
+            <div class="transition-demo-item trans-bg">
+              <span>Background</span>
+              <code>background-color</code>
+            </div>
+            <div class="transition-demo-item trans-color">
+              <span>Color</span>
+              <code>color</code>
+            </div>
+            <div class="transition-demo-item trans-size">
+              <span>Size</span>
+              <code>transform: scale()</code>
+            </div>
+            <div class="transition-demo-item trans-border">
+              <span>Border</span>
+              <code>border-radius</code>
+            </div>
+            <div class="transition-demo-item trans-shadow">
+              <span>Shadow</span>
+              <code>box-shadow</code>
+            </div>
+            <div class="transition-demo-item trans-opacity">
+              <span>Opacity</span>
+              <code>opacity</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Timing Functions Compared</div>
+        <div class="lab-card-body">
+          <p>The <strong>timing function</strong> controls the speed curve. Hover to see each function in action — they all take the same duration but feel very different.</p>
+          <div class="timing-compare-grid">
+            <div class="timing-item timing-linear">
+              <div class="timing-ball"></div>
+              <code>linear</code>
+            </div>
+            <div class="timing-item timing-ease">
+              <div class="timing-ball"></div>
+              <code>ease</code>
+            </div>
+            <div class="timing-item timing-ease-in">
+              <div class="timing-ball"></div>
+              <code>ease-in</code>
+            </div>
+            <div class="timing-item timing-ease-out">
+              <div class="timing-ball"></div>
+              <code>ease-out</code>
+            </div>
+            <div class="timing-item timing-ease-in-out">
+              <div class="timing-ball"></div>
+              <code>ease-in-out</code>
+            </div>
+            <div class="timing-item timing-step-start">
+              <div class="timing-ball"></div>
+              <code>step-start</code>
+            </div>
+            <div class="timing-item timing-steps">
+              <div class="timing-ball"></div>
+              <code>steps(5)</code>
+            </div>
+            <div class="timing-item timing-cubic">
+              <div class="timing-ball"></div>
+              <code>cubic-bezier</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">✏️ Practice — Transition Speed</div>
+        <div class="lab-card-body practice-zone">
+          <p>Try changing the <code>transition-duration</code> on <code>.my-trans-box</code> in <code>labs.css</code>. Make it super slow (3s) or instant (0.05s).</p>
+          <div class="output-zone">
+            <p>Hover the box:</p>
+            <div class="my-trans-box">Hover Me</div>
+          </div>
+          <div class="code-block">
+<pre><code>/* In labs.css — find .my-trans-box */
+.my-trans-box {
+  background: var(--accent);
+  color: white;
+  padding: 20px 40px;
+  transition: all 0.4s ease; /* ← Change the duration! */
+}
+.my-trans-box:hover {
+  background: var(--accent2);
+  border-radius: 50px;
+  letter-spacing: 4px;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Transition Delay</div>
+        <div class="lab-card-body">
+          <p>Add a <code>transition-delay</code> to stagger multiple elements. Hover the row below — each box starts its animation slightly later than the last.</p>
+          <div class="stagger-row">
+            <div class="stagger-box s1">1</div>
+            <div class="stagger-box s2">2</div>
+            <div class="stagger-box s3">3</div>
+            <div class="stagger-box s4">4</div>
+            <div class="stagger-box s5">5</div>
+          </div>
+          <div class="code-block">
+<pre><code>.s1 { transition-delay: 0s; }
+.s2 { transition-delay: 0.1s; }
+.s3 { transition-delay: 0.2s; }
+.s4 { transition-delay: 0.3s; }
+.s5 { transition-delay: 0.4s; }</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 2: CSS TRANSFORMS
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2>CSS Transforms</h2>
+      </div>
+      <p>The <code>transform</code> property moves, scales, rotates, or skews elements without affecting the document flow. Combine with transitions for silky-smooth effects.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Transform Gallery — Hover Each</div>
+        <div class="lab-card-body">
+          <div class="demo-row wrap-flex gap-16">
+            <div class="transform-demo-box tf-translate">
+              <code>translateX(20px)</code>
+            </div>
+            <div class="transform-demo-box tf-translatey">
+              <code>translateY(-20px)</code>
+            </div>
+            <div class="transform-demo-box tf-scale-up">
+              <code>scale(1.3)</code>
+            </div>
+            <div class="transform-demo-box tf-scale-down">
+              <code>scale(0.7)</code>
+            </div>
+            <div class="transform-demo-box tf-rotate">
+              <code>rotate(45deg)</code>
+            </div>
+            <div class="transform-demo-box tf-rotate-neg">
+              <code>rotate(-180deg)</code>
+            </div>
+            <div class="transform-demo-box tf-skew">
+              <code>skewX(20deg)</code>
+            </div>
+            <div class="transform-demo-box tf-skewy">
+              <code>skewY(10deg)</code>
+            </div>
+            <div class="transform-demo-box tf-combo">
+              <code>translate+scale+rotate</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">transform-origin</div>
+        <div class="lab-card-body">
+          <p>By default transforms happen from the center. Change <code>transform-origin</code> to pivot from any point. All boxes below rotate 90deg on hover — but from different origins.</p>
+          <div class="demo-row wrap-flex gap-24">
+            <div class="origin-demo origin-center">
+              <div class="origin-box">Center</div>
+              <code>center center</code>
+            </div>
+            <div class="origin-demo origin-top-left">
+              <div class="origin-box">Top Left</div>
+              <code>top left</code>
+            </div>
+            <div class="origin-demo origin-bottom-right">
+              <div class="origin-box">Bottom Right</div>
+              <code>bottom right</code>
+            </div>
+            <div class="origin-demo origin-top-center">
+              <div class="origin-box">Top Center</div>
+              <code>top center</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">✏️ Practice — Build a Hover Card</div>
+        <div class="lab-card-body practice-zone">
+          <p>Add transforms to the card below by editing <code>.practice-hover-card</code> in <code>labs.css</code>. Try combining <code>translateY(-8px)</code> with <code>scale(1.02)</code>.</p>
+          <div class="output-zone">
+            <div class="practice-hover-card">
+              <h3>Hover Me</h3>
+              <p>I lift up on hover. Adjust the transform values to change how much I move.</p>
+            </div>
+          </div>
+          <div class="code-block">
+<pre><code>.practice-hover-card {
+  padding: 24px;
+  border: 2px solid #ddd;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.practice-hover-card:hover {
+  transform: translateY(-8px); /* ← Change this! */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 3: @KEYFRAMES ANIMATIONS
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2>@keyframes Animations</h2>
+      </div>
+      <p>While transitions go between two states, <code>@keyframes</code> let you define a full multi-step animation sequence. Use the <code>animation</code> shorthand to apply it.</p>
+
+      <div class="callout-info">
+        <strong>Syntax:</strong> <code>animation: name duration timing-function delay iteration-count direction fill-mode;</code>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Keyframe Animation Library</div>
+        <div class="lab-card-body">
+          <p>These are all running with <code>animation-iteration-count: infinite</code>.</p>
+          <div class="demo-row wrap-flex gap-20">
+            <div class="anim-showcase">
+              <div class="anim-box anim-spin">↻</div>
+              <code>spin</code>
+            </div>
+            <div class="anim-showcase">
+              <div class="anim-box anim-pulse">●</div>
+              <code>pulse</code>
+            </div>
+            <div class="anim-showcase">
+              <div class="anim-box anim-bounce">⬆</div>
+              <code>bounce</code>
+            </div>
+            <div class="anim-showcase">
+              <div class="anim-box anim-float">☁</div>
+              <code>float</code>
+            </div>
+            <div class="anim-showcase">
+              <div class="anim-box anim-shake">!</div>
+              <code>shake</code>
+            </div>
+            <div class="anim-showcase">
+              <div class="anim-box anim-ping">⬤</div>
+              <code>ping</code>
+            </div>
+            <div class="anim-showcase">
+              <div class="anim-box anim-gradient">BG</div>
+              <code>gradient-shift</code>
+            </div>
+            <div class="anim-showcase">
+              <div class="anim-box anim-typewriter-demo">Hello_</div>
+              <code>typewriter</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Animation Properties Explained</div>
+        <div class="lab-card-body">
+          <div class="anim-props-grid">
+            <div class="anim-prop-card">
+              <div class="anim-prop-name"><code>animation-duration</code></div>
+              <div class="anim-prop-demo">
+                <div class="anim-duration-demo d-fast anim-spin-demo">Fast (0.3s)</div>
+                <div class="anim-duration-demo d-med anim-spin-demo">Medium (1s)</div>
+                <div class="anim-duration-demo d-slow anim-spin-demo">Slow (3s)</div>
+              </div>
+            </div>
+            <div class="anim-prop-card">
+              <div class="anim-prop-name"><code>animation-iteration-count</code></div>
+              <div class="anim-prop-demo">
+                <div class="anim-iteration-demo iter-1 anim-bounce-small">1×</div>
+                <div class="anim-iteration-demo iter-3 anim-bounce-small">3×</div>
+                <div class="anim-iteration-demo iter-inf anim-bounce-small">∞</div>
+              </div>
+            </div>
+            <div class="anim-prop-card">
+              <div class="anim-prop-name"><code>animation-direction</code></div>
+              <div class="anim-prop-demo">
+                <div class="anim-dir-demo dir-normal anim-slide-demo">normal →</div>
+                <div class="anim-dir-demo dir-reverse anim-slide-demo">← reverse</div>
+                <div class="anim-dir-demo dir-alt anim-slide-demo">alternate ↔</div>
+              </div>
+            </div>
+            <div class="anim-prop-card">
+              <div class="anim-prop-name"><code>animation-fill-mode</code></div>
+              <div class="anim-prop-demo">
+                <div class="anim-fill-demo fill-none">none (resets)</div>
+                <div class="anim-fill-demo fill-forwards">forwards (stays)</div>
+                <div class="anim-fill-demo fill-both">both</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Writing Your Own @keyframes</div>
+        <div class="lab-card-body">
+          <div class="code-block">
+<pre><code>/* Define the animation */
+@keyframes my-fade-in {
+  from {              /* 0% start state */
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {                /* 100% end state */
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Multi-step example */
+@keyframes traffic-light {
+  0%   { background: red; }
+  33%  { background: orange; }
+  66%  { background: green; }
+  100% { background: red; }
+}
+
+/* Apply it */
+.my-element {
+  animation: my-fade-in 0.6s ease-out forwards;
+  /*         name       dur  timing    fill-mode */
+}</code></pre>
+          </div>
+
+          <div class="traffic-light-demo">
+            <div class="traffic-light-box">
+              <div class="tl-bulb tl-red tl-anim"></div>
+              <div class="tl-bulb tl-yellow"></div>
+              <div class="tl-bulb tl-green"></div>
+            </div>
+            <div class="traffic-light-box">
+              <div class="tl-bulb tl-red"></div>
+              <div class="tl-bulb tl-yellow tl-anim2"></div>
+              <div class="tl-bulb tl-green"></div>
+            </div>
+            <div class="traffic-light-box">
+              <div class="tl-bulb tl-red"></div>
+              <div class="tl-bulb tl-yellow"></div>
+              <div class="tl-bulb tl-green tl-anim3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">✏️ Practice — Create Your First @keyframes</div>
+        <div class="lab-card-body practice-zone">
+          <p>Find <code>.my-keyframe-box</code> and the <code>@keyframes my-custom-anim</code> block in <code>labs.css</code>. Fill in the animation steps to make the box do something interesting.</p>
+          <div class="output-zone">
+            <div class="my-keyframe-box">Animate Me!</div>
+          </div>
+          <div class="code-block">
+<pre><code>/* In labs.css — modify this! */
+@keyframes my-custom-anim {
+  0%   { background: var(--accent); transform: scale(1); }
+  50%  { background: var(--accent2); transform: scale(1.2); }
+         /* ↑ Add your own steps here! */
+  100% { background: var(--accent); transform: scale(1); }
+}
+
+.my-keyframe-box {
+  width: 100px;
+  height: 100px;
+  /* ↓ Try changing: duration, timing, iteration-count */
+  animation: my-custom-anim 2s ease-in-out infinite;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 4: HOVER CARD EFFECTS
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2>Real-World Hover Effects</h2>
+      </div>
+      <p>Putting transitions and transforms together to create polished UI components. These are effects you'll see on real websites.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Hover Effect Gallery</div>
+        <div class="lab-card-body">
+          <div class="hover-effects-grid">
+            <div class="hover-card hover-lift">
+              <div class="hc-icon">🚀</div>
+              <h3>Lift</h3>
+              <p>translateY + shadow</p>
+            </div>
+            <div class="hover-card hover-scale">
+              <div class="hc-icon">🔍</div>
+              <h3>Scale</h3>
+              <p>scale(1.05)</p>
+            </div>
+            <div class="hover-card hover-glow">
+              <div class="hc-icon">✨</div>
+              <h3>Glow</h3>
+              <p>box-shadow color</p>
+            </div>
+            <div class="hover-card hover-bg">
+              <div class="hc-icon">🎨</div>
+              <h3>Fill BG</h3>
+              <p>background-color</p>
+            </div>
+            <div class="hover-card hover-border">
+              <div class="hc-icon">📐</div>
+              <h3>Border</h3>
+              <p>border-color</p>
+            </div>
+            <div class="hover-card hover-tilt">
+              <div class="hc-icon">🎯</div>
+              <h3>Tilt</h3>
+              <p>rotate + skew</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Button Animation States</div>
+        <div class="lab-card-body">
+          <p>Hover and click (use <code>:active</code>) each button. Good buttons have at least 3 visual states: default, hover, and active (pressed).</p>
+          <div class="demo-row wrap-flex gap-16">
+            <button class="btn-anim btn-press">Press Me</button>
+            <button class="btn-anim btn-slide-fill">Slide Fill</button>
+            <button class="btn-anim btn-arrow">Get Started →</button>
+            <button class="btn-anim btn-outline-fill">Outline Fill</button>
+            <button class="btn-anim btn-shake-err">Error Shake</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Loading Animations</div>
+        <div class="lab-card-body">
+          <p>Pure CSS loaders — no JavaScript or images needed.</p>
+          <div class="loaders-grid">
+            <div class="loader-item">
+              <div class="loader-spin"></div>
+              <code>rotate</code>
+            </div>
+            <div class="loader-item">
+              <div class="loader-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <code>dots scale</code>
+            </div>
+            <div class="loader-item">
+              <div class="loader-bar"><div class="loader-bar-inner"></div></div>
+              <code>width</code>
+            </div>
+            <div class="loader-item">
+              <div class="loader-pulse-ring"></div>
+              <code>ping</code>
+            </div>
+            <div class="loader-item">
+              <div class="loader-bars">
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <code>scaleY</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 5: ANIMATION TIPS
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2>Performance &amp; Best Practices</h2>
+      </div>
+
+      <div class="callout-warn">
+        <strong>⚡ Performance Tip:</strong> Only animate <code>transform</code> and <code>opacity</code> for smooth 60fps. Animating <code>width</code>, <code>height</code>, <code>top</code>, <code>left</code>, or <code>margin</code> triggers layout recalculations and causes jank.
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">GPU-Friendly vs Layout-Triggering</div>
+        <div class="lab-card-body">
+          <div class="perf-compare">
+            <div class="perf-card perf-good">
+              <div class="perf-label good">✅ Performant</div>
+              <div class="code-block">
+<pre><code>/* GPU-accelerated — no layout reflow */
+.smooth {
+  transition: transform 0.3s, opacity 0.3s;
+}
+.smooth:hover {
+  transform: translateY(-4px);
+  opacity: 0.8;
+}</code></pre>
+              </div>
+              <div class="perf-demo-box perf-smooth">Hover (smooth)</div>
+            </div>
+            <div class="perf-card perf-bad">
+              <div class="perf-label bad">⚠️ Avoid in Animations</div>
+              <div class="code-block">
+<pre><code>/* Triggers layout recalculation */
+.janky {
+  transition: margin-top 0.3s, width 0.3s;
+}
+.janky:hover {
+  margin-top: -4px;
+  width: 110%;
+}</code></pre>
+              </div>
+              <div class="perf-demo-box perf-janky">Hover (janky)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">will-change Hint</div>
+        <div class="lab-card-body">
+          <div class="code-block">
+<pre><code>/* Tell the browser to prep GPU layer ahead of time */
+.animated-element {
+  will-change: transform, opacity;
+}
+
+/* Only use on elements you know will animate.
+   Don't use on everything — it uses extra memory. */</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Respecting User Preferences — prefers-reduced-motion</div>
+        <div class="lab-card-body">
+          <div class="callout-info">Some users have vestibular disorders or motion sensitivity and prefer reduced animations. Always wrap heavy animations in this media query.</div>
+          <div class="code-block">
+<pre><code>/* Default: animate freely */
+.hero-element {
+  animation: float 3s ease infinite;
+}
+
+/* Respect system preference */
+@media (prefers-reduced-motion: reduce) {
+  .hero-element {
+    animation: none; /* or a very subtle fade */
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-tip">
+        <strong>🎯 Rule of Thumb:</strong> Animations should take 150–300ms for UI feedback (hovers, clicks). Decorative animations can be 1–3s. Anything longer than 5s should loop or be optional.
+      </div>
+
+    </section>
+
+    <!-- PREV / NEXT -->
+    <div class="page-nav">
+      <a href="04-media.html" class="page-nav-btn prev">← Module 04: Media</a>
+      <a href="06-seo.html" class="page-nav-btn next">Module 06: SEO →</a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>WebDev Lab — Built for learners, by a learner. Module 05 of 08.</p>
+  </footer>
+
+</body>
+</html>

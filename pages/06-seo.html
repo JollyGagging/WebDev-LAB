@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn SEO fundamentals, semantic HTML, meta tags, Open Graph, structured data, and Core Web Vitals including CLS.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Module 06 — SEO & Semantic HTML | WebDev Lab">
+  <meta property="og:description" content="Learn SEO fundamentals, semantic HTML, meta tags, and Core Web Vitals.">
+  <meta property="og:type" content="article">
+  <title>06 — SEO &amp; Semantic HTML | WebDev Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/labs.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="../index.html" class="nav-logo">WebDev<span>Lab</span></a>
+    <div class="nav-links">
+      <a href="01-typography.html">Typography</a>
+      <a href="02-boxmodel.html">Box Model</a>
+      <a href="03-layouts.html">Layouts</a>
+      <a href="04-media.html">Media</a>
+      <a href="05-animations.html">Animations</a>
+      <a href="06-seo.html" class="active">SEO</a>
+      <a href="07-advanced.html">Advanced</a>
+      <a href="08-responsive.html">Responsive</a>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <span>Module 06</span></div>
+    <div class="hero-label">Module 06</div>
+    <h1>SEO &amp; <em>Semantic HTML</em></h1>
+    <p>Search engines can't see your page like a human. Learn to write HTML that both browsers and bots understand — through semantic elements, meta tags, structured data, and Core Web Vitals.</p>
+  </header>
+
+  <main class="page-content">
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 1: SEMANTIC HTML
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2>Semantic HTML</h2>
+      </div>
+      <p>Semantic elements carry <em>meaning</em>. Instead of a generic <code>&lt;div&gt;</code>, you use tags that describe the content's purpose — making it easier for screen readers, search crawlers, and future developers.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">div Soup vs Semantic HTML</div>
+        <div class="lab-card-body">
+          <div class="seo-compare">
+            <div class="seo-col seo-bad">
+              <div class="seo-col-label bad">❌ Div Soup — Meaningless</div>
+              <div class="code-block">
+<pre><code>&lt;div class="header"&gt;
+  &lt;div class="nav"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="main"&gt;
+  &lt;div class="article"&gt;
+    &lt;div class="title"&gt;Heading&lt;/div&gt;
+    &lt;div class="text"&gt;Content&lt;/div&gt;
+    &lt;div class="sidebar"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="footer"&gt;...&lt;/div&gt;</code></pre>
+              </div>
+            </div>
+            <div class="seo-col seo-good">
+              <div class="seo-col-label good">✅ Semantic HTML — Clear Structure</div>
+              <div class="code-block">
+<pre><code>&lt;header&gt;
+  &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;article&gt;
+    &lt;h1&gt;Heading&lt;/h1&gt;
+    &lt;p&gt;Content&lt;/p&gt;
+    &lt;aside&gt;...&lt;/aside&gt;
+  &lt;/article&gt;
+&lt;/main&gt;
+&lt;footer&gt;...&lt;/footer&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Semantic Elements Reference</div>
+        <div class="lab-card-body">
+          <div class="semantic-map">
+            <div class="sem-element sem-header">
+              <code>&lt;header&gt;</code>
+              <span>Site header or article header. Contains logo, nav, intro.</span>
+            </div>
+            <div class="sem-element sem-nav">
+              <code>&lt;nav&gt;</code>
+              <span>Navigation links — main menu, breadcrumbs, pagination.</span>
+            </div>
+            <div class="sem-element sem-main">
+              <code>&lt;main&gt;</code>
+              <span>Dominant content of the page. Only ONE per page.</span>
+            </div>
+            <div class="sem-element sem-article">
+              <code>&lt;article&gt;</code>
+              <span>Self-contained content: blog post, product card, comment.</span>
+            </div>
+            <div class="sem-element sem-section">
+              <code>&lt;section&gt;</code>
+              <span>Thematic grouping of content, usually with a heading.</span>
+            </div>
+            <div class="sem-element sem-aside">
+              <code>&lt;aside&gt;</code>
+              <span>Content tangentially related to main content. Sidebars, callouts.</span>
+            </div>
+            <div class="sem-element sem-footer">
+              <code>&lt;footer&gt;</code>
+              <span>Site footer or section footer. Links, copyright, contact.</span>
+            </div>
+            <div class="sem-element sem-figure">
+              <code>&lt;figure&gt; + &lt;figcaption&gt;</code>
+              <span>Images, diagrams, code blocks with captions.</span>
+            </div>
+            <div class="sem-element sem-time">
+              <code>&lt;time datetime=""&gt;</code>
+              <span>Machine-readable dates/times. Helps search engines.</span>
+            </div>
+            <div class="sem-element sem-address">
+              <code>&lt;address&gt;</code>
+              <span>Contact information for the nearest article/body ancestor.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Heading Hierarchy — Critical for SEO</div>
+        <div class="lab-card-body">
+          <div class="callout-warn">
+            <strong>Rule:</strong> Every page must have exactly ONE <code>&lt;h1&gt;</code>. Don't skip heading levels. Don't use headings just for visual size — use CSS for that.
+          </div>
+          <div class="heading-hierarchy">
+            <div class="hh-item hh-h1">
+              <code>h1</code> — Page title. One per page. Your main keyword goes here.
+            </div>
+            <div class="hh-item hh-h2">
+              <code>h2</code> — Major section headings. Multiple allowed.
+            </div>
+            <div class="hh-item hh-h3">
+              <code>h3</code> — Subsections within h2.
+            </div>
+            <div class="hh-item hh-h4">
+              <code>h4</code> — Sub-subsections within h3.
+            </div>
+            <div class="hh-item hh-h5">
+              <code>h5</code> — Rarely needed. Consider restructuring if you're using these.
+            </div>
+            <div class="hh-item hh-h6">
+              <code>h6</code> — Very rarely needed. Don't force the hierarchy.
+            </div>
+          </div>
+          <div class="code-block">
+<pre><code>&lt;!-- ✅ Good heading structure --&gt;
+&lt;h1&gt;The Ultimate Guide to CSS Grid&lt;/h1&gt;
+  &lt;h2&gt;What is CSS Grid?&lt;/h2&gt;
+  &lt;h2&gt;Grid Container Properties&lt;/h2&gt;
+    &lt;h3&gt;grid-template-columns&lt;/h3&gt;
+    &lt;h3&gt;grid-template-rows&lt;/h3&gt;
+  &lt;h2&gt;Grid Item Properties&lt;/h2&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 2: META TAGS
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2>Meta Tags</h2>
+      </div>
+      <p>Meta tags live in <code>&lt;head&gt;</code> and aren't visible on the page — but search engines and social platforms read them to understand and display your content.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Essential Meta Tags</div>
+        <div class="lab-card-body">
+          <div class="code-block">
+<pre><code>&lt;head&gt;
+  &lt;!-- Character encoding — ALWAYS first --&gt;
+  &lt;meta charset="UTF-8"&gt;
+
+  &lt;!-- Mobile viewport control --&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+
+  &lt;!-- Page title — most important SEO element (50-60 chars) --&gt;
+  &lt;title&gt;Learn CSS Grid | WebDev Lab&lt;/title&gt;
+
+  &lt;!-- Description shown in search results (150-160 chars) --&gt;
+  &lt;meta name="description" content="A practical guide to CSS Grid layout..."&gt;
+
+  &lt;!-- Tell bots to index this page and follow its links --&gt;
+  &lt;meta name="robots" content="index, follow"&gt;
+
+  &lt;!-- Author --&gt;
+  &lt;meta name="author" content="Your Name"&gt;
+
+  &lt;!-- Canonical — tell search engines this is the "real" URL --&gt;
+  &lt;link rel="canonical" href="https://yoursite.com/css-grid"&gt;
+&lt;/head&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Open Graph Tags — Social Sharing</div>
+        <div class="lab-card-body">
+          <p>When someone shares your page on Twitter, LinkedIn, or Facebook, these tags control what the preview card shows. Without them, the platform guesses — often badly.</p>
+          <div class="code-block">
+<pre><code>&lt;!-- Open Graph (Facebook, LinkedIn, WhatsApp, etc.) --&gt;
+&lt;meta property="og:title" content="The Ultimate CSS Grid Guide"&gt;
+&lt;meta property="og:description" content="Learn CSS Grid from scratch..."&gt;
+&lt;meta property="og:image" content="https://yoursite.com/og-image.png"&gt;
+&lt;meta property="og:url" content="https://yoursite.com/css-grid"&gt;
+&lt;meta property="og:type" content="article"&gt;
+
+&lt;!-- Twitter Card --&gt;
+&lt;meta name="twitter:card" content="summary_large_image"&gt;
+&lt;meta name="twitter:title" content="The Ultimate CSS Grid Guide"&gt;
+&lt;meta name="twitter:description" content="Learn CSS Grid from scratch..."&gt;
+&lt;meta name="twitter:image" content="https://yoursite.com/og-image.png"&gt;</code></pre>
+          </div>
+          <div class="og-preview">
+            <div class="og-image-placeholder">OG Image (1200×630px)</div>
+            <div class="og-text">
+              <div class="og-domain">yoursite.com</div>
+              <div class="og-title">The Ultimate CSS Grid Guide</div>
+              <div class="og-desc">Learn CSS Grid from scratch with interactive examples...</div>
+            </div>
+          </div>
+          <p class="label-note">↑ How your link looks when shared on social media</p>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">✏️ Practice — Audit This Page's Meta Tags</div>
+        <div class="lab-card-body practice-zone">
+          <p>Right-click this page → View Page Source (or press <kbd>Ctrl+U</kbd>). Find the <code>&lt;head&gt;</code> section. Can you spot all the meta tags? Now open <code>06-seo.html</code> and improve the description or add a Twitter card tag.</p>
+          <div class="code-block">
+<pre><code>&lt;!-- This page's &lt;head&gt; already has these — check them! --&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+&lt;meta name="description" content="..."&gt;
+&lt;meta name="robots" content="index, follow"&gt;
+&lt;meta property="og:title" content="..."&gt;
+
+&lt;!-- Try adding: --&gt;
+&lt;meta name="twitter:card" content="summary_large_image"&gt;
+&lt;meta name="twitter:title" content="Your title here"&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 3: CORE WEB VITALS & CLS
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2>Core Web Vitals &amp; CLS</h2>
+      </div>
+      <p>Google measures page experience with <strong>Core Web Vitals</strong> — real-world performance metrics that affect your search ranking.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">The Three Core Web Vitals</div>
+        <div class="lab-card-body">
+          <div class="cwv-grid">
+            <div class="cwv-card">
+              <div class="cwv-abbr lcp">LCP</div>
+              <div class="cwv-name">Largest Contentful Paint</div>
+              <div class="cwv-desc">How fast does the main content load? Target: under 2.5s</div>
+              <div class="cwv-tip">Optimize: Lazy-load offscreen images, use <code>loading="lazy"</code></div>
+            </div>
+            <div class="cwv-card">
+              <div class="cwv-abbr fid">FID / INP</div>
+              <div class="cwv-name">Interaction to Next Paint</div>
+              <div class="cwv-desc">How fast does the page respond to input? Target: under 200ms</div>
+              <div class="cwv-tip">Optimize: Minimize JavaScript blocking the main thread</div>
+            </div>
+            <div class="cwv-card cwv-focus">
+              <div class="cwv-abbr cls">CLS</div>
+              <div class="cwv-name">Cumulative Layout Shift</div>
+              <div class="cwv-desc">How much does content jump around while loading? Target: under 0.1</div>
+              <div class="cwv-tip">The main one to fix with HTML/CSS — see below!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Cumulative Layout Shift (CLS) Deep Dive</div>
+        <div class="lab-card-body">
+          <p>CLS happens when elements load late and push content down. The most common culprits: images without dimensions, ads that load in, web fonts that swap, and embeds without reserved space.</p>
+
+          <div class="cls-compare">
+            <div class="cls-col">
+              <div class="cls-label bad">❌ Causes Layout Shift</div>
+              <div class="cls-demo-bad">
+                <div class="cls-text-block">← This text is here</div>
+                <div class="cls-image-no-size">Image loads here... later</div>
+                <div class="cls-text-block">← This text gets PUSHED DOWN when image loads</div>
+              </div>
+              <div class="code-block">
+<pre><code>&lt;!-- No dimensions = CLS --&gt;
+&lt;img src="photo.jpg" alt="photo"&gt;</code></pre>
+              </div>
+            </div>
+            <div class="cls-col">
+              <div class="cls-label good">✅ Prevents Layout Shift</div>
+              <div class="cls-demo-good">
+                <div class="cls-text-block">← This text stays put</div>
+                <div class="cls-image-with-size">Space reserved while image loads</div>
+                <div class="cls-text-block">← This text doesn't move</div>
+              </div>
+              <div class="code-block">
+<pre><code>&lt;!-- Width + height reserves space --&gt;
+&lt;img src="photo.jpg" alt="photo"
+     width="800" height="600"&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">The aspect-ratio Fix for CLS</div>
+        <div class="lab-card-body">
+          <p>The modern way to reserve space for images and videos — use CSS <code>aspect-ratio</code>. The browser reserves the correct height before the image loads.</p>
+          <div class="code-block">
+<pre><code>/* Responsive image that reserves space — no CLS */
+.responsive-img {
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Browser reserves this height immediately */
+  object-fit: cover;
+  background: #eee; /* Placeholder color while loading */
+}
+
+/* For iframes (YouTube embeds, maps) */
+.embed-container {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+.embed-container iframe {
+  width: 100%;
+  height: 100%;
+}</code></pre>
+          </div>
+          <div class="aspect-ratio-demo">
+            <div class="ar-demo-box ar-16-9">
+              <span>16:9 — Reserved before content loads</span>
+            </div>
+            <div class="ar-demo-box ar-1-1">
+              <span>1:1</span>
+            </div>
+            <div class="ar-demo-box ar-4-3">
+              <span>4:3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Skeleton Screens — Loading Placeholder</div>
+        <div class="lab-card-body">
+          <p>Instead of blank white space while content loads, show animated skeleton placeholders. Pure CSS shimmer effect:</p>
+          <div class="skeleton-card">
+            <div class="skeleton-avatar"></div>
+            <div class="skeleton-lines">
+              <div class="skeleton-line sk-full"></div>
+              <div class="skeleton-line sk-three-quarter"></div>
+              <div class="skeleton-line sk-half"></div>
+            </div>
+          </div>
+          <div class="code-block">
+<pre><code>@keyframes shimmer {
+  0%   { background-position: -468px 0; }
+  100% { background-position: 468px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    to right,
+    #eee 8%, #ddd 18%, #eee 33%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.5s linear infinite;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 4: ACCESSIBILITY & ARIA
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2>Accessibility &amp; ARIA</h2>
+      </div>
+      <p>Accessible HTML is better for SEO too. Screen readers and search crawlers both parse the same DOM — fixing one often fixes the other.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Critical Accessibility Rules</div>
+        <div class="lab-card-body">
+          <div class="a11y-list">
+            <div class="a11y-item">
+              <div class="a11y-check">✅</div>
+              <div class="a11y-content">
+                <strong>Always add alt text to images</strong>
+                <div class="code-block"><pre><code>&lt;img src="dog.jpg" alt="Golden retriever playing in park"&gt;
+&lt;!-- Decorative only: --&gt;
+&lt;img src="divider.png" alt=""&gt;</code></pre></div>
+              </div>
+            </div>
+            <div class="a11y-item">
+              <div class="a11y-check">✅</div>
+              <div class="a11y-content">
+                <strong>Use lang attribute on &lt;html&gt;</strong>
+                <div class="code-block"><pre><code>&lt;html lang="en"&gt;</code></pre></div>
+              </div>
+            </div>
+            <div class="a11y-item">
+              <div class="a11y-check">✅</div>
+              <div class="a11y-content">
+                <strong>Label all form inputs</strong>
+                <div class="code-block"><pre><code>&lt;label for="email"&gt;Email Address&lt;/label&gt;
+&lt;input type="email" id="email" name="email"&gt;</code></pre></div>
+              </div>
+            </div>
+            <div class="a11y-item">
+              <div class="a11y-check">✅</div>
+              <div class="a11y-content">
+                <strong>Focus styles — never remove outline without a replacement</strong>
+                <div class="code-block"><pre><code>/* ❌ Don't do this */
+*:focus { outline: none; }
+
+/* ✅ Do this instead */
+*:focus-visible {
+  outline: 3px solid var(--accent2);
+  outline-offset: 2px;
+}</code></pre></div>
+              </div>
+            </div>
+            <div class="a11y-item">
+              <div class="a11y-check">✅</div>
+              <div class="a11y-content">
+                <strong>Use ARIA landmarks and roles where semantic HTML isn't enough</strong>
+                <div class="code-block"><pre><code>&lt;!-- aria-label for non-obvious elements --&gt;
+&lt;button aria-label="Close modal"&gt;✕&lt;/button&gt;
+
+&lt;!-- aria-describedby for extra context --&gt;
+&lt;input aria-describedby="pw-hint"&gt;
+&lt;p id="pw-hint"&gt;Must be 8+ characters&lt;/p&gt;
+
+&lt;!-- aria-live for dynamic content --&gt;
+&lt;div aria-live="polite"&gt;3 results found&lt;/div&gt;</code></pre></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Color Contrast</div>
+        <div class="lab-card-body">
+          <p>WCAG requires a contrast ratio of at least 4.5:1 for normal text, 3:1 for large text.</p>
+          <div class="contrast-grid">
+            <div class="contrast-demo c-fail-1">Fail: 1.5:1</div>
+            <div class="contrast-demo c-fail-2">Fail: 2.1:1</div>
+            <div class="contrast-demo c-pass-large">Pass (large): 3.2:1</div>
+            <div class="contrast-demo c-pass-normal">Pass (normal): 5.1:1</div>
+            <div class="contrast-demo c-pass-best">Best: 12:1+</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 5: STRUCTURED DATA
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2>Structured Data &amp; Rich Results</h2>
+      </div>
+      <p>Structured data helps Google show <strong>rich results</strong> — star ratings, FAQ dropdowns, breadcrumbs, and event info — directly in search results.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">JSON-LD Structured Data (Recommended)</div>
+        <div class="lab-card-body">
+          <div class="code-block">
+<pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Learn CSS in 30 Days",
+  "author": {
+    "@type": "Person",
+    "name": "Your Name"
+  },
+  "datePublished": "2024-01-15",
+  "description": "A practical CSS learning guide...",
+  "image": "https://yoursite.com/article-image.jpg"
+}
+&lt;/script&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Rich Result Types</div>
+        <div class="lab-card-body">
+          <div class="rich-results-grid">
+            <div class="rich-result-card">
+              <div class="rr-type">⭐ Reviews</div>
+              <div class="rr-schema"><code>schema.org/Product</code></div>
+              <div class="rr-desc">Shows star ratings in search results</div>
+            </div>
+            <div class="rich-result-card">
+              <div class="rr-type">❓ FAQ</div>
+              <div class="rr-schema"><code>schema.org/FAQPage</code></div>
+              <div class="rr-desc">Expandable questions in search</div>
+            </div>
+            <div class="rich-result-card">
+              <div class="rr-type">🍞 Breadcrumbs</div>
+              <div class="rr-schema"><code>schema.org/BreadcrumbList</code></div>
+              <div class="rr-desc">Shows page path in URL line</div>
+            </div>
+            <div class="rich-result-card">
+              <div class="rr-type">📅 Events</div>
+              <div class="rr-schema"><code>schema.org/Event</code></div>
+              <div class="rr-desc">Shows date/location in search</div>
+            </div>
+            <div class="rich-result-card">
+              <div class="rr-type">🏢 Organization</div>
+              <div class="rr-schema"><code>schema.org/Organization</code></div>
+              <div class="rr-desc">Adds knowledge panel data</div>
+            </div>
+            <div class="rich-result-card">
+              <div class="rr-type">📝 Article</div>
+              <div class="rr-schema"><code>schema.org/Article</code></div>
+              <div class="rr-desc">Better article presentation</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-tip">
+        <strong>🔧 Tool:</strong> Use Google's <strong>Rich Results Test</strong> at <code>search.google.com/test/rich-results</code> to validate your structured data. And Google Search Console to monitor how your pages appear in search.
+      </div>
+
+    </section>
+
+    <!-- PREV / NEXT -->
+    <div class="page-nav">
+      <a href="05-animations.html" class="page-nav-btn prev">← Module 05: Animations</a>
+      <a href="07-advanced.html" class="page-nav-btn next">Module 07: Advanced →</a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>WebDev Lab — Built for learners, by a learner. Module 06 of 08.</p>
+  </footer>
+
+</body>
+</html>

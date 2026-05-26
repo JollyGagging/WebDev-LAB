@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 03 — Layouts: Flex & Grid | WebDev Lab</title>
+  <meta name="description" content="Master CSS Flexbox and CSS Grid — the two most powerful layout systems in modern web development.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/labs.css">
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <a href="../index.html" class="nav-logo">WebDev<span>Lab</span></a>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="01-typography.html">Typography</a></li>
+      <li><a href="02-boxmodel.html">Box Model</a></li>
+      <li><a href="03-layouts.html" class="active">Layouts</a></li>
+      <li><a href="04-media.html">Media</a></li>
+      <li><a href="05-animations.html">Animations</a></li>
+      <li><a href="06-seo.html">SEO</a></li>
+      <li><a href="07-advanced.html">Advanced CSS</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-hero">
+    <div class="hero-tag">Module 03</div>
+    <h1>Layouts:<br><em>Flex &amp; Grid</em></h1>
+    <p>Flexbox for one-dimensional alignment. CSS Grid for two-dimensional layouts. Together, these two tools can build any page you can imagine.</p>
+  </header>
+
+  <main class="lab-container">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">›</span>
+      <a href="02-boxmodel.html">Box Model</a>
+      <span class="sep">›</span>
+      <span>Layouts</span>
+    </nav>
+
+    <!-- ===== 3.1 DISPLAY ===== -->
+    <section aria-labelledby="display-heading">
+      <div class="section-header">
+        <p class="section-num">3.1</p>
+        <h2 id="display-heading">The display Property</h2>
+        <p>Every element has a default display value. <code>block</code> takes full width. <code>inline</code> flows with text. <code>inline-block</code> is both. <code>none</code> hides it completely.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">🟦</span>
+          <h3>display Values</h3>
+          <span class="card-tag">display</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <p style="font-family:var(--font-mono); font-size:0.78rem; color:var(--muted); margin-bottom:var(--s3);">display: block (each takes full width, stacks vertically)</p>
+            <div class="display-block-demo">Block element #1</div>
+            <div class="display-block-demo">Block element #2</div>
+
+            <p style="font-family:var(--font-mono); font-size:0.78rem; color:var(--muted); margin: var(--s4) 0 var(--s3);">display: inline (flows with text, no width/height)</p>
+            <span class="display-inline-demo">Inline #1</span>
+            <span class="display-inline-demo">Inline #2</span>
+            <span class="display-inline-demo">Inline #3</span>
+            <span> — these flow like words in a sentence</span>
+
+            <p style="font-family:var(--font-mono); font-size:0.78rem; color:var(--muted); margin: var(--s4) 0 var(--s3);">display: inline-block (can set width/height, flows inline)</p>
+            <span class="display-ib-demo">IB #1</span>
+            <span class="display-ib-demo">IB #2</span>
+            <span class="display-ib-demo">IB #3</span>
+          </div>
+
+          <pre>/* Common display values */
+display: block;         /* Full width, stacks */
+display: inline;        /* Flows with text */
+display: inline-block;  /* Inline but can set width/height */
+display: flex;          /* Flexbox container */
+display: grid;          /* Grid container */
+display: none;          /* Completely hidden (removed from flow) */
+
+/* vs visibility: hidden — hides but keeps the space */
+visibility: hidden;</pre>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 3.2 FLEXBOX ===== -->
+    <section aria-labelledby="flex-heading">
+      <div class="section-header">
+        <p class="section-num">3.2</p>
+        <h2 id="flex-heading">Flexbox</h2>
+        <p>Flexbox is a one-dimensional layout system. It arranges items in a row or column and gives you powerful alignment tools. Apply <code>display: flex</code> to the parent.</p>
+      </div>
+
+      <!-- flex-direction -->
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">↔️</span>
+          <h3>flex-direction</h3>
+          <span class="card-tag">flex-direction</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4);">
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">flex-direction: row (default)</code>
+                <div class="flex-container-base flex-row" style="min-height:60px;">
+                  <div class="flex-item">A</div>
+                  <div class="flex-item">B</div>
+                  <div class="flex-item">C</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">flex-direction: row-reverse</code>
+                <div class="flex-container-base flex-row-rev" style="min-height:60px;">
+                  <div class="flex-item">A</div>
+                  <div class="flex-item">B</div>
+                  <div class="flex-item">C</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">flex-direction: column</code>
+                <div class="flex-container-base flex-col" style="min-height:160px;">
+                  <div class="flex-item">A</div>
+                  <div class="flex-item">B</div>
+                  <div class="flex-item">C</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">flex-direction: column-reverse</code>
+                <div class="flex-container-base flex-col-rev" style="min-height:160px;">
+                  <div class="flex-item">A</div>
+                  <div class="flex-item">B</div>
+                  <div class="flex-item">C</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- justify-content -->
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">📐</span>
+          <h3>justify-content</h3>
+          <span class="card-tag">justify-content</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="callout callout-info">
+            <span class="callout-icon">💡</span>
+            <div><code>justify-content</code> aligns items along the <strong>main axis</strong> (horizontal in row, vertical in column).</div>
+          </div>
+          <div class="practice-zone">
+            <div style="display: flex; flex-direction: column; gap: var(--s3);">
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:4px;">justify-content: flex-start</code>
+                <div class="flex-container-base jc-start" style="min-height:50px;"><div class="flex-item">A</div><div class="flex-item">B</div><div class="flex-item">C</div></div>
+              </div>
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:4px;">justify-content: flex-end</code>
+                <div class="flex-container-base jc-end" style="min-height:50px;"><div class="flex-item">A</div><div class="flex-item">B</div><div class="flex-item">C</div></div>
+              </div>
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:4px;">justify-content: center</code>
+                <div class="flex-container-base jc-center" style="min-height:50px;"><div class="flex-item">A</div><div class="flex-item">B</div><div class="flex-item">C</div></div>
+              </div>
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:4px;">justify-content: space-between</code>
+                <div class="flex-container-base jc-between" style="min-height:50px;"><div class="flex-item">A</div><div class="flex-item">B</div><div class="flex-item">C</div></div>
+              </div>
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:4px;">justify-content: space-around</code>
+                <div class="flex-container-base jc-around" style="min-height:50px;"><div class="flex-item">A</div><div class="flex-item">B</div><div class="flex-item">C</div></div>
+              </div>
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:4px;">justify-content: space-evenly</code>
+                <div class="flex-container-base jc-evenly" style="min-height:50px;"><div class="flex-item">A</div><div class="flex-item">B</div><div class="flex-item">C</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- align-items -->
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">⬍</span>
+          <h3>align-items</h3>
+          <span class="card-tag">align-items</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="callout callout-info">
+            <span class="callout-icon">💡</span>
+            <div><code>align-items</code> aligns items along the <strong>cross axis</strong> (perpendicular to the main axis).</div>
+          </div>
+          <div class="practice-zone">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4);">
+              <div>
+                <code style="font-size:0.72rem; display:block; margin-bottom:4px;">align-items: flex-start</code>
+                <div class="flex-container-base ai-start">
+                  <div class="flex-item" style="height:40px;">A</div>
+                  <div class="flex-item" style="height:70px;">B</div>
+                  <div class="flex-item" style="height:55px;">C</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size:0.72rem; display:block; margin-bottom:4px;">align-items: flex-end</code>
+                <div class="flex-container-base ai-end">
+                  <div class="flex-item" style="height:40px;">A</div>
+                  <div class="flex-item" style="height:70px;">B</div>
+                  <div class="flex-item" style="height:55px;">C</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size:0.72rem; display:block; margin-bottom:4px;">align-items: center ✓ (most common)</code>
+                <div class="flex-container-base ai-center">
+                  <div class="flex-item" style="height:40px;">A</div>
+                  <div class="flex-item" style="height:70px;">B</div>
+                  <div class="flex-item" style="height:55px;">C</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size:0.72rem; display:block; margin-bottom:4px;">align-items: stretch (default)</code>
+                <div class="flex-container-base ai-stretch">
+                  <div class="flex-item">A</div>
+                  <div class="flex-item">B</div>
+                  <div class="flex-item">C</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout callout-tip" style="margin-top: var(--s4);">
+            <span class="callout-icon">✅</span>
+            <div><strong>Perfect centering:</strong> <code>display: flex; justify-content: center; align-items: center;</code> — this is the most useful CSS combo you'll ever use.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- flex-wrap + gap -->
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">↩️</span>
+          <h3>flex-wrap &amp; gap</h3>
+          <span class="card-tag">flex-wrap · gap</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <div style="display: flex; flex-direction: column; gap: var(--s4);">
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:4px;">flex-wrap: nowrap (items shrink or overflow)</code>
+                <div class="flex-container-base flex-nowrap" style="min-height:50px;">
+                  <div class="flex-item" style="min-width:80px;">Item 1</div>
+                  <div class="flex-item" style="min-width:80px;">Item 2</div>
+                  <div class="flex-item" style="min-width:80px;">Item 3</div>
+                  <div class="flex-item" style="min-width:80px;">Item 4</div>
+                  <div class="flex-item" style="min-width:80px;">Item 5</div>
+                  <div class="flex-item" style="min-width:80px;">Item 6</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:4px;">flex-wrap: wrap (items wrap to next line)</code>
+                <div class="flex-container-base flex-wrap-yes" style="min-height:50px;">
+                  <div class="flex-item" style="min-width:80px;">Item 1</div>
+                  <div class="flex-item" style="min-width:80px;">Item 2</div>
+                  <div class="flex-item" style="min-width:80px;">Item 3</div>
+                  <div class="flex-item" style="min-width:80px;">Item 4</div>
+                  <div class="flex-item" style="min-width:80px;">Item 5</div>
+                  <div class="flex-item" style="min-width:80px;">Item 6</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <pre>/* gap replaces margin hacks between flex items */
+.container {
+  display: flex;
+  gap: 16px;         /* Both row and column gap */
+  row-gap: 8px;      /* Only vertical gap */
+  column-gap: 16px;  /* Only horizontal gap */
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 3.3 CSS GRID ===== -->
+    <section aria-labelledby="grid-heading">
+      <div class="section-header">
+        <p class="section-num">3.3</p>
+        <h2 id="grid-heading">CSS Grid</h2>
+        <p>Grid is a two-dimensional layout system — rows AND columns simultaneously. The most powerful layout tool in CSS.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">🗺️</span>
+          <h3>Grid Template Columns</h3>
+          <span class="card-tag">grid-template-columns</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <div style="display: flex; flex-direction: column; gap: var(--s5);">
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">grid-template-columns: 1fr (single column)</code>
+                <div class="grid-container-base g-1col">
+                  <div class="grid-cell">1</div>
+                  <div class="grid-cell">2</div>
+                  <div class="grid-cell">3</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">grid-template-columns: 1fr 1fr (2 equal columns)</code>
+                <div class="grid-container-base g-2col">
+                  <div class="grid-cell">1</div><div class="grid-cell">2</div>
+                  <div class="grid-cell">3</div><div class="grid-cell">4</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">grid-template-columns: 1fr 1fr 1fr (3 equal)</code>
+                <div class="grid-container-base g-3col">
+                  <div class="grid-cell">1</div><div class="grid-cell">2</div><div class="grid-cell">3</div>
+                  <div class="grid-cell">4</div><div class="grid-cell">5</div><div class="grid-cell">6</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">grid-template-columns: repeat(4, 1fr) (4 equal)</code>
+                <div class="grid-container-base g-4col">
+                  <div class="grid-cell">1</div><div class="grid-cell">2</div><div class="grid-cell">3</div><div class="grid-cell">4</div>
+                  <div class="grid-cell">5</div><div class="grid-cell">6</div><div class="grid-cell">7</div><div class="grid-cell">8</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">grid-template-columns: 200px 1fr (fixed + fluid)</code>
+                <div class="grid-container-base g-fixed">
+                  <div class="grid-cell">Sidebar (200px)</div>
+                  <div class="grid-cell">Main content (1fr — takes remaining space)</div>
+                  <div class="grid-cell">Sidebar (200px)</div>
+                  <div class="grid-cell">Main content</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) — responsive!</code>
+                <div class="grid-container-base g-auto">
+                  <div class="grid-cell">1</div><div class="grid-cell">2</div><div class="grid-cell">3</div>
+                  <div class="grid-cell">4</div><div class="grid-cell">5</div><div class="grid-cell">6</div>
+                  <div class="grid-cell">7</div><div class="grid-cell">8</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="callout callout-tip">
+            <span class="callout-icon">✅</span>
+            <div><code>repeat(auto-fill, minmax(MIN, 1fr))</code> creates a responsive grid with NO media queries. It's the most powerful one-liner in CSS Grid.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Spanning -->
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">⬛</span>
+          <h3>Grid Spanning — grid-column &amp; grid-row</h3>
+          <span class="card-tag">grid-column · grid-row</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <code style="font-size:0.75rem; display:block; margin-bottom:var(--s2);">Items can span multiple columns or rows</code>
+            <div class="grid-container-base g-3col">
+              <div class="grid-cell span-3-col">Spans 3 columns (grid-column: span 3)</div>
+              <div class="grid-cell">Normal</div>
+              <div class="grid-cell">Normal</div>
+              <div class="grid-cell">Normal</div>
+              <div class="grid-cell span-2-col">Spans 2 columns</div>
+              <div class="grid-cell">Normal</div>
+            </div>
+          </div>
+          <pre>/* Spanning */
+.item { grid-column: span 2; }    /* spans 2 cols */
+.item { grid-row: span 2; }       /* spans 2 rows */
+
+/* Explicit placement */
+.item { grid-column: 1 / 3; }    /* from line 1 to line 3 */
+.item { grid-column: 1 / -1; }   /* from first to last line */
+.item { grid-row: 2 / 4; }
+
+/* Shorthand */
+.item { grid-area: 2 / 1 / 4 / 3; } /* row-start / col-start / row-end / col-end */</pre>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 3.4 POSITION ===== -->
+    <section aria-labelledby="position-heading">
+      <div class="section-header">
+        <p class="section-num">3.4</p>
+        <h2 id="position-heading">Positioning</h2>
+        <p><code>static</code> (default), <code>relative</code> (offset from own position), <code>absolute</code> (relative to nearest positioned ancestor), <code>fixed</code> (relative to viewport), <code>sticky</code> (relative until scroll threshold).</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">📍</span>
+          <h3>Position Types</h3>
+          <span class="card-tag">position</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <div class="position-demo-wrap">
+              <div class="pos-box pos-static" style="display: inline-block; margin: 8px;">static (normal flow)</div>
+              <div class="pos-box pos-relative">relative (moved 20px from normal)</div>
+              <div class="pos-box pos-absolute">absolute (top: 20px right: 20px)</div>
+              <div class="pos-box pos-abs-br">abs bottom-right</div>
+              <div class="pos-box pos-abs-tl">abs top-left</div>
+            </div>
+          </div>
+          <pre>/* static — default, ignores top/left/right/bottom */
+position: static;
+
+/* relative — offset from normal position */
+position: relative;
+top: 20px;  left: 10px;
+
+/* absolute — removed from flow, placed relative to nearest
+   positioned (non-static) ancestor */
+position: absolute;
+top: 0;  right: 0;
+
+/* fixed — stays in same spot when scrolling */
+position: fixed;
+bottom: 20px;  right: 20px;
+
+/* sticky — normal flow until scroll position hit */
+position: sticky;
+top: 0;  /* Sticks when it reaches the top */</pre>
+
+          <p style="font-weight:700; margin: var(--s5) 0 var(--s3);">z-index — Stacking Order:</p>
+          <div class="practice-zone">
+            <div class="zindex-wrap">
+              <div class="z-box z0" style="width:140px; height:80px;">z-index: 0</div>
+              <div class="z-box z1" style="width:120px; height:70px;">z-index: 1</div>
+              <div class="z-box z2" style="width:120px; height:70px;">z-index: 2</div>
+              <div class="z-box z3" style="width:120px; height:70px;">z-index: 3 (on top)</div>
+            </div>
+          </div>
+          <div class="callout callout-warn">
+            <span class="callout-icon">⚠️</span>
+            <div><code>z-index</code> only works on positioned elements (<code>relative</code>, <code>absolute</code>, <code>fixed</code>, or <code>sticky</code>). It has no effect on <code>static</code> elements.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prev / Next -->
+    <div style="display: flex; justify-content: space-between; margin-top: var(--s8);">
+      <a href="02-boxmodel.html" style="display:inline-flex; align-items:center; gap: var(--s3); background: #f0f0ec; color: var(--ink); padding: var(--s3) var(--s5); border-radius: var(--r-full); font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; text-decoration: none;">← Box Model</a>
+      <a href="04-media.html" style="display:inline-flex; align-items:center; gap: var(--s3); background: var(--ink); color: var(--paper); padding: var(--s3) var(--s5); border-radius: var(--r-full); font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; text-decoration: none;">Next: Media →</a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <p><strong>WebDev Lab</strong> — Module 03: Layouts</p>
+    <p style="margin-top:0.5rem;"><a href="../index.html">← Back to all modules</a></p>
+  </footer>
+
+</body>
+</html>

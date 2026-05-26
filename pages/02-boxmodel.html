@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 02 — The Box Model | WebDev Lab</title>
+  <meta name="description" content="Master CSS margins, padding, borders, border-radius, box-sizing, overflow, and box shadows.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/labs.css">
+
+  <style>
+    .margin-grid { display: flex; flex-wrap: wrap; gap: 0; background: repeating-linear-gradient(45deg, rgba(232,64,28,0.04) 0, rgba(232,64,28,0.04) 10px, transparent 10px, transparent 20px); border: 2px dashed rgba(232,64,28,0.3); padding: 0; }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <a href="../index.html" class="nav-logo">WebDev<span>Lab</span></a>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="01-typography.html">Typography</a></li>
+      <li><a href="02-boxmodel.html" class="active">Box Model</a></li>
+      <li><a href="03-layouts.html">Layouts</a></li>
+      <li><a href="04-media.html">Media</a></li>
+      <li><a href="05-animations.html">Animations</a></li>
+      <li><a href="06-seo.html">SEO</a></li>
+      <li><a href="07-advanced.html">Advanced CSS</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-hero">
+    <div class="hero-tag">Module 02</div>
+    <h1>The <em>Box Model</em></h1>
+    <p>Every element in HTML is a rectangular box. Understanding margin, padding, border, and content is the single most important concept in CSS layout.</p>
+  </header>
+
+  <main class="lab-container">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">›</span>
+      <a href="01-typography.html">Typography</a>
+      <span class="sep">›</span>
+      <span>Box Model</span>
+    </nav>
+
+    <!-- ===== 2.1 THE BOX MODEL DIAGRAM ===== -->
+    <section aria-labelledby="boxmodel-heading">
+      <div class="section-header">
+        <p class="section-num">2.1</p>
+        <h2 id="boxmodel-heading">Understanding The Box Model</h2>
+        <p>Every element is a box with four layers: <strong>content</strong>, <strong>padding</strong>, <strong>border</strong>, and <strong>margin</strong>. The browser draws them from inside out.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">📦</span>
+          <h3>The Box Model — Live Diagram</h3>
+          <span class="card-tag">box model</span>
+        </div>
+        <div class="lab-card-body">
+
+          <!-- Visual diagram using only HTML + CSS -->
+          <div style="padding: var(--s5); background: #f5f5f0; border-radius: var(--r-md); overflow: auto; margin-bottom: var(--s4);">
+            <div style="display: inline-block; background: rgba(232,64,28,0.12); border: 3px dashed rgba(232,64,28,0.5); padding: 30px; position: relative;">
+              <span style="position: absolute; top: 4px; left: 8px; font-family: var(--font-mono); font-size: 0.68rem; color: #e8401c; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">MARGIN</span>
+              <div style="display: inline-block; background: rgba(28,111,232,0.12); border: 3px dashed rgba(28,111,232,0.5); padding: 24px; position: relative;">
+                <span style="position: absolute; top: 4px; left: 8px; font-family: var(--font-mono); font-size: 0.68rem; color: #1c6fe8; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">BORDER</span>
+                <div style="display: inline-block; background: rgba(245,158,11,0.15); border: 3px dashed rgba(245,158,11,0.6); padding: 24px; position: relative;">
+                  <span style="position: absolute; top: 4px; left: 8px; font-family: var(--font-mono); font-size: 0.68rem; color: #b45309; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">PADDING</span>
+                  <div style="background: var(--ink); color: var(--paper); padding: 20px 32px; border-radius: 4px; font-family: var(--font-display); font-size: 1rem; font-weight: 800; letter-spacing: -0.02em; text-align: center; min-width: 140px;">
+                    CONTENT
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout callout-info">
+            <span class="callout-icon">📐</span>
+            <div>
+              <strong>box-sizing: content-box</strong> (default) — width/height = content only<br>
+              <strong>box-sizing: border-box</strong> ✓ — width/height includes padding + border. Almost every modern project uses <code>*, *::before, *::after { box-sizing: border-box; }</code>
+            </div>
+          </div>
+
+          <pre>/* The most important CSS reset line */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.my-box {
+  width: 300px;    /* With border-box: total width is 300px */
+  padding: 20px;   /* Eating INTO the 300px */
+  border: 2px solid black; /* Also eating in */
+  margin: 16px;    /* Space OUTSIDE the box — not part of width */
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 2.2 MARGIN ===== -->
+    <section aria-labelledby="margin-heading">
+      <div class="section-header">
+        <p class="section-num">2.2</p>
+        <h2 id="margin-heading">Margin</h2>
+        <p>Margin creates space <em>outside</em> the border. Adjacent vertical margins collapse to the larger of the two — this is called "margin collapsing".</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">↕️</span>
+          <h3>Margin Directions &amp; Shorthand</h3>
+          <span class="card-tag">margin</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone" style="background: repeating-linear-gradient(45deg, rgba(232,64,28,0.03) 0, rgba(232,64,28,0.03) 10px, transparent 10px, transparent 20px);">
+            <p style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); margin-bottom: var(--s4);">Each box below has the same size but different margins. The red tiled pattern is the margin space.</p>
+
+            <div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 0;">
+              <div>
+                <code style="font-size: 0.72rem; display: block; margin-bottom: 4px;">margin: 0</code>
+                <div class="margin-demo-box" style="margin: 0;">0</div>
+              </div>
+              <div>
+                <code style="font-size: 0.72rem; display: block; margin-bottom: 4px;">margin: 16px</code>
+                <div class="margin-demo-box" style="margin: 16px;">16px</div>
+              </div>
+              <div>
+                <code style="font-size: 0.72rem; display: block; margin-bottom: 4px;">margin: 8px 24px</code>
+                <div class="margin-demo-box" style="margin: 8px 24px;">8px 24px</div>
+              </div>
+              <div>
+                <code style="font-size: 0.72rem; display: block; margin-bottom: 4px;">margin: 0 auto</code>
+                <div class="margin-demo-box" style="margin: 0 auto; width: 120px;">centered</div>
+              </div>
+            </div>
+          </div>
+
+          <pre>/* Shorthand — 1 value: all 4 sides */
+margin: 16px;
+
+/* 2 values: top+bottom | left+right */
+margin: 8px 24px;
+
+/* 3 values: top | left+right | bottom */
+margin: 8px 24px 16px;
+
+/* 4 values: top | right | bottom | left (clockwise) */
+margin: 8px 16px 24px 32px;
+
+/* Individual sides */
+margin-top: 8px;
+margin-right: 16px;
+margin-bottom: 24px;
+margin-left: 32px;
+
+/* Center horizontally — must have width set! */
+margin: 0 auto;
+
+/* Negative margin — pulls elements closer */
+margin-top: -8px;</pre>
+
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 2.3 PADDING ===== -->
+    <section aria-labelledby="padding-heading">
+      <div class="section-header">
+        <p class="section-num">2.3</p>
+        <h2 id="padding-heading">Padding</h2>
+        <p>Padding creates space <em>inside</em> the border, between the border and the content. Padding is always transparent — it shows the background color of the element.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">🛋️</span>
+          <h3>Padding Visualized</h3>
+          <span class="card-tag">padding</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <div style="display: flex; flex-wrap: wrap; gap: var(--s5); align-items: flex-start;">
+              <div>
+                <code style="font-size: 0.72rem; display: block; margin-bottom: var(--s2);">padding: 0</code>
+                <div class="padding-demo-outer" style="padding: 0;">
+                  <div class="padding-demo-inner" style="padding: 0; font-size: 0.8rem;">Content</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size: 0.72rem; display: block; margin-bottom: var(--s2);">padding: 8px</code>
+                <div class="padding-demo-outer" style="padding: 0;">
+                  <div class="padding-demo-inner" style="padding: 8px; font-size: 0.8rem;">Content</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size: 0.72rem; display: block; margin-bottom: var(--s2);">padding: 16px</code>
+                <div class="padding-demo-outer" style="padding: 0;">
+                  <div class="padding-demo-inner" style="padding: 16px; font-size: 0.8rem;">Content</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size: 0.72rem; display: block; margin-bottom: var(--s2);">padding: 32px</code>
+                <div class="padding-demo-outer" style="padding: 0;">
+                  <div class="padding-demo-inner" style="padding: 32px; font-size: 0.8rem;">Content</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size: 0.72rem; display: block; margin-bottom: var(--s2);">padding: 8px 32px</code>
+                <div class="padding-demo-outer" style="padding: 0;">
+                  <div class="padding-demo-inner" style="padding: 8px 32px; font-size: 0.8rem;">Wide padding</div>
+                </div>
+              </div>
+              <div>
+                <code style="font-size: 0.72rem; display: block; margin-bottom: var(--s2);">padding: 32px 8px</code>
+                <div class="padding-demo-outer" style="padding: 0;">
+                  <div class="padding-demo-inner" style="padding: 32px 8px; font-size: 0.8rem;">Tall pad</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 2.4 BORDERS ===== -->
+    <section aria-labelledby="border-heading">
+      <div class="section-header">
+        <p class="section-num">2.4</p>
+        <h2 id="border-heading">Borders &amp; Border Radius</h2>
+        <p><code>border: width style color</code>. Styles: <code>solid</code>, <code>dashed</code>, <code>dotted</code>, <code>double</code>, <code>groove</code>, <code>ridge</code>. Radius creates rounded corners.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">🔲</span>
+          <h3>Border Styles &amp; Border Radius</h3>
+          <span class="card-tag">border · border-radius</span>
+        </div>
+        <div class="lab-card-body">
+
+          <p style="font-weight: 700; margin-bottom: var(--s3);">Border Styles:</p>
+          <div class="practice-zone">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--s3);">
+              <div class="border-demo-box border-solid">border: 3px solid</div>
+              <div class="border-demo-box border-dashed">border: 3px dashed</div>
+              <div class="border-demo-box border-dotted">border: 3px dotted</div>
+              <div class="border-demo-box border-double">border: 6px double</div>
+              <div class="border-demo-box border-groove">border: 6px groove</div>
+              <div class="border-demo-box border-ridge">border: 6px ridge</div>
+              <div class="border-demo-box border-inset">border: 6px inset</div>
+              <div class="border-demo-box border-outset">border: 6px outset</div>
+            </div>
+          </div>
+
+          <p style="font-weight: 700; margin-bottom: var(--s3); margin-top: var(--s5);">Border Directions:</p>
+          <div class="practice-zone">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--s3);">
+              <div class="border-demo-box border-all">border (all sides)</div>
+              <div class="border-demo-box border-top">border-top only</div>
+              <div class="border-demo-box border-right">border-right only</div>
+              <div class="border-demo-box border-bottom">border-bottom only</div>
+              <div class="border-demo-box border-left">border-left only</div>
+              <div class="border-demo-box" style="border-top: 3px solid var(--accent); border-bottom: 3px solid var(--accent2);">top + bottom</div>
+            </div>
+          </div>
+
+          <p style="font-weight: 700; margin-bottom: var(--s3); margin-top: var(--s5);">Border Radius:</p>
+          <div class="practice-zone">
+            <div style="display: flex; flex-wrap: wrap; gap: var(--s4); align-items: center;">
+              <div style="width: 100px; height: 70px; background: var(--accent); display:flex; align-items:center; justify-content:center; color:white; font-family:var(--font-mono); font-size:0.75rem; font-weight:700; border-radius: 0;" title="border-radius: 0">0</div>
+              <div style="width: 100px; height: 70px; background: var(--accent); display:flex; align-items:center; justify-content:center; color:white; font-family:var(--font-mono); font-size:0.75rem; font-weight:700; border-radius: 4px;" title="border-radius: 4px">4px</div>
+              <div style="width: 100px; height: 70px; background: var(--accent); display:flex; align-items:center; justify-content:center; color:white; font-family:var(--font-mono); font-size:0.75rem; font-weight:700; border-radius: 12px;" title="border-radius: 12px">12px</div>
+              <div style="width: 100px; height: 70px; background: var(--accent); display:flex; align-items:center; justify-content:center; color:white; font-family:var(--font-mono); font-size:0.75rem; font-weight:700; border-radius: 24px;" title="border-radius: 24px">24px</div>
+              <div style="width: 100px; height: 70px; background: var(--accent); display:flex; align-items:center; justify-content:center; color:white; font-family:var(--font-mono); font-size:0.75rem; font-weight:700; border-radius: 9999px;" title="border-radius: 9999px">pill</div>
+              <div style="width: 80px; height: 80px; background: var(--accent); display:flex; align-items:center; justify-content:center; color:white; font-family:var(--font-mono); font-size:0.75rem; font-weight:700; border-radius: 50%;" title="border-radius: 50%">circle<br>50%</div>
+              <div style="width: 100px; height: 70px; background: var(--accent); display:flex; align-items:center; justify-content:center; color:white; font-family:var(--font-mono); font-size:0.75rem; font-weight:700; border-radius: 50px 0 50px 0;" title="border-radius: 50px 0 50px 0">asymmetric</div>
+              <div style="width: 100px; height: 70px; background: var(--accent); display:flex; align-items:center; justify-content:center; color:white; font-family:var(--font-mono); font-size:0.75rem; font-weight:700; border-radius: 50% 20% / 30% 60%;" title="border-radius ellipse">ellipse</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 2.5 BOX SHADOW ===== -->
+    <section aria-labelledby="shadow-heading">
+      <div class="section-header">
+        <p class="section-num">2.5</p>
+        <h2 id="shadow-heading">Box Shadow</h2>
+        <p><code>box-shadow: x y blur spread color</code>. Add <code>inset</code> to put the shadow inside. Stack multiple shadows with commas.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">🌑</span>
+          <h3>Shadow Gallery</h3>
+          <span class="card-tag">box-shadow</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--s6); padding: var(--s5);">
+              <div class="shadow-demo-box bshadow-sm">Small<br><code style="background: none; color: var(--muted); font-size: 0.7rem; padding: 0;">0 1px 3px</code></div>
+              <div class="shadow-demo-box bshadow-md">Medium<br><code style="background: none; color: var(--muted); font-size: 0.7rem; padding: 0;">0 4px 12px</code></div>
+              <div class="shadow-demo-box bshadow-lg">Large<br><code style="background: none; color: var(--muted); font-size: 0.7rem; padding: 0;">0 8px 30px</code></div>
+              <div class="shadow-demo-box bshadow-xl">Extra Large<br><code style="background: none; color: var(--muted); font-size: 0.7rem; padding: 0;">0 20px 60px</code></div>
+              <div class="shadow-demo-box bshadow-colored" style="background: var(--accent); color: white;">Colored<br><code style="background: none; color: rgba(255,255,255,0.7); font-size: 0.7rem; padding: 0;">accent glow</code></div>
+              <div class="shadow-demo-box bshadow-inner">Inner<br><code style="background: none; color: var(--muted); font-size: 0.7rem; padding: 0;">inset shadow</code></div>
+              <div class="shadow-demo-box bshadow-none">None<br><code style="background: none; color: var(--muted); font-size: 0.7rem; padding: 0;">box-shadow: none</code></div>
+              <div class="shadow-demo-box bshadow-multi">Multi<br><code style="background: none; color: var(--muted); font-size: 0.7rem; padding: 0;">3 stacked</code></div>
+              <div class="shadow-demo-box bshadow-hard">Hard Offset<br><code style="background: none; color: var(--muted); font-size: 0.7rem; padding: 0;">5px 5px 0 #000</code></div>
+            </div>
+          </div>
+          <pre>/* Syntax: x-offset y-offset blur spread color */
+box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.15);
+
+/* Inset shadow (inside the element) */
+box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+
+/* Multiple shadows (comma-separated) */
+box-shadow:
+  0 2px 4px rgba(0,0,0,0.1),
+  0 8px 24px rgba(0,0,0,0.1),
+  0 24px 48px rgba(0,0,0,0.08);
+
+/* Colored glow */
+box-shadow: 0 8px 24px rgba(232, 64, 28, 0.4);
+
+/* Hard offset (design trend) */
+box-shadow: 5px 5px 0 #000000;</pre>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 2.6 OVERFLOW ===== -->
+    <section aria-labelledby="overflow-heading">
+      <div class="section-header">
+        <p class="section-num">2.6</p>
+        <h2 id="overflow-heading">Overflow</h2>
+        <p><code>overflow</code> controls what happens when content is bigger than its container. Values: <code>visible</code>, <code>hidden</code>, <code>scroll</code>, <code>auto</code>.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">📤</span>
+          <h3>Overflow Lab</h3>
+          <span class="card-tag">overflow</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--s5);">
+              <div>
+                <code style="font-size: 0.78rem; display:block; margin-bottom: var(--s2);">overflow: visible (default)</code>
+                <div style="height: 80px; border: 2px solid var(--border); padding: var(--s3); overflow: visible; background: #fafaf8; border-radius: var(--r-sm);">
+                  <p>Content spills outside the box when it's too big. You can SEE it overflow.</p>
+                </div>
+              </div>
+              <div>
+                <code style="font-size: 0.78rem; display:block; margin-bottom: var(--s2);">overflow: hidden</code>
+                <div style="height: 80px; border: 2px solid var(--border); padding: var(--s3); overflow: hidden; background: #fafaf8; border-radius: var(--r-sm);">
+                  <p>Content is clipped. You cannot see what's cut off. This is very useful for image containers and card thumbnails.</p>
+                </div>
+              </div>
+              <div>
+                <code style="font-size: 0.78rem; display:block; margin-bottom: var(--s2);">overflow: scroll</code>
+                <div style="height: 80px; border: 2px solid var(--border); padding: var(--s3); overflow: scroll; background: #fafaf8; border-radius: var(--r-sm);">
+                  <p>A scrollbar always appears, even if content fits. You can scroll to see everything. This works for both X and Y axes.</p>
+                </div>
+              </div>
+              <div>
+                <code style="font-size: 0.78rem; display:block; margin-bottom: var(--s2);">overflow: auto</code>
+                <div style="height: 80px; border: 2px solid var(--border); padding: var(--s3); overflow: auto; background: #fafaf8; border-radius: var(--r-sm);">
+                  <p>Scrollbar only appears when needed. This is almost always what you want instead of scroll. Much cleaner on short content.</p>
+                </div>
+              </div>
+              <div>
+                <code style="font-size: 0.78rem; display:block; margin-bottom: var(--s2);">overflow-x: hidden (no horiz scroll)</code>
+                <div style="height: 80px; border: 2px solid var(--border); padding: var(--s3); overflow-x: hidden; overflow-y: auto; background: #fafaf8; border-radius: var(--r-sm);">
+                  <p>You can scroll vertically but not horizontally. Great for preventing unwanted horizontal scrollbars on mobile. This is content to scroll.</p>
+                </div>
+              </div>
+              <div>
+                <code style="font-size: 0.78rem; display:block; margin-bottom: var(--s2);">text-overflow: ellipsis</code>
+                <div style="height: 50px; border: 2px solid var(--border); padding: var(--s3); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; background: #fafaf8; border-radius: var(--r-sm);">
+                  This very long piece of text will be cut off with an ellipsis at the end because we use text-overflow: ellipsis
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prev / Next -->
+    <div style="display: flex; justify-content: space-between; margin-top: var(--s8);">
+      <a href="01-typography.html" style="display:inline-flex; align-items:center; gap: var(--s3); background: #f0f0ec; color: var(--ink); padding: var(--s3) var(--s5); border-radius: var(--r-full); font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: background 0.2s;" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='#f0f0ec'">
+        ← Typography
+      </a>
+      <a href="03-layouts.html" style="display:inline-flex; align-items:center; gap: var(--s3); background: var(--ink); color: var(--paper); padding: var(--s3) var(--s5); border-radius: var(--r-full); font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: background 0.2s;" onmouseover="this.style.background='#e8401c'" onmouseout="this.style.background='#0d0d0d'">
+        Next: Layouts →
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <p><strong>WebDev Lab</strong> — Module 02: The Box Model</p>
+    <p style="margin-top:0.5rem;"><a href="../index.html">← Back to all modules</a></p>
+  </footer>
+
+</body>
+</html>

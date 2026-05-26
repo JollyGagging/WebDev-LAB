@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 01 — Typography & Text | WebDev Lab</title>
+  <meta name="description" content="Learn to control every aspect of text with CSS: color, font, size, weight, spacing, shadows, and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/labs.css">
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <a href="../index.html" class="nav-logo">WebDev<span>Lab</span></a>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="01-typography.html" class="active">Typography</a></li>
+      <li><a href="02-boxmodel.html">Box Model</a></li>
+      <li><a href="03-layouts.html">Layouts</a></li>
+      <li><a href="04-media.html">Media</a></li>
+      <li><a href="05-animations.html">Animations</a></li>
+      <li><a href="06-seo.html">SEO</a></li>
+      <li><a href="07-advanced.html">Advanced CSS</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-hero">
+    <div class="hero-tag">Module 01</div>
+    <h1>Typography<br><em>&amp; Text</em></h1>
+    <p>Color, font, size, weight, spacing, decoration, shadow — this module covers everything that makes text beautiful and readable.</p>
+  </header>
+
+  <main class="lab-container">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="sep">›</span>
+      <span>Module 01 — Typography</span>
+    </nav>
+
+    <!-- ===== 1.1 TEXT COLOR ===== -->
+    <section aria-labelledby="color-heading">
+      <div class="section-header">
+        <p class="section-num">1.1</p>
+        <h2 id="color-heading">Text Color</h2>
+        <p>The <code>color</code> property sets the foreground (text) color. CSS accepts many formats: named colors, hex, rgb, rgba, hsl, and hsla.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">🎨</span>
+          <h3>Change Text Color</h3>
+          <span class="card-tag">color</span>
+        </div>
+        <div class="lab-card-body">
+
+          <div class="callout callout-info">
+            <span class="callout-icon">💡</span>
+            <div>Open <code>css/labs.css</code> and find <code>.color-target-text</code>. Change the <code>color</code> value to anything below and save.</div>
+          </div>
+
+          <div class="output-zone">
+            <p class="color-target-text">← This text's color is set in CSS. Change it!</p>
+          </div>
+
+          <div class="practice-zone">
+            <p style="margin-bottom: var(--s4); font-weight: 600; font-size: 0.9rem;">Try these values for <code>color</code>:</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--s3);">
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); margin-bottom: var(--s1);">Named</p>
+                <p style="color: tomato; font-weight: 700;">tomato</p>
+                <p style="color: cornflowerblue; font-weight: 700;">cornflowerblue</p>
+                <p style="color: mediumseagreen; font-weight: 700;">mediumseagreen</p>
+                <p style="color: goldenrod; font-weight: 700;">goldenrod</p>
+                <p style="color: hotpink; font-weight: 700;">hotpink</p>
+              </div>
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); margin-bottom: var(--s1);">Hex</p>
+                <p style="color: #e8401c; font-weight: 700;">#e8401c</p>
+                <p style="color: #1c6fe8; font-weight: 700;">#1c6fe8</p>
+                <p style="color: #22c55e; font-weight: 700;">#22c55e</p>
+                <p style="color: #f59e0b; font-weight: 700;">#f59e0b</p>
+                <p style="color: #9333ea; font-weight: 700;">#9333ea</p>
+              </div>
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); margin-bottom: var(--s1);">RGB / RGBA</p>
+                <p style="color: rgb(200, 50, 50); font-weight: 700;">rgb(200, 50, 50)</p>
+                <p style="color: rgba(0, 100, 200, 0.8); font-weight: 700;">rgba(0,100,200,0.8)</p>
+                <p style="color: rgba(0,0,0,0.5); font-weight: 700;">rgba(0,0,0,0.5)</p>
+              </div>
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); margin-bottom: var(--s1);">HSL</p>
+                <p style="color: hsl(0, 80%, 50%); font-weight: 700;">hsl(0, 80%, 50%)</p>
+                <p style="color: hsl(120, 60%, 40%); font-weight: 700;">hsl(120, 60%, 40%)</p>
+                <p style="color: hsl(240, 70%, 60%); font-weight: 700;">hsl(240, 70%, 60%)</p>
+                <p style="color: hsl(40, 100%, 50%); font-weight: 700;">hsl(40, 100%, 50%)</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Background Color -->
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">🖌️</span>
+          <h3>Background Color</h3>
+          <span class="card-tag">background-color</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="callout callout-info">
+            <span class="callout-icon">💡</span>
+            <div>Find <code>.bg-color-target</code> in labs.css and change <code>background-color</code>.</div>
+          </div>
+          <div class="output-zone">
+            <div class="bg-color-target">← This box has a background-color. Change it!</div>
+          </div>
+          <div class="practice-zone">
+            <p style="font-weight: 600; font-size: 0.9rem; margin-bottom: var(--s4);">Live swatches — hover to see the value:</p>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--s2);">
+              <div style="background: linear-gradient(135deg, #667eea, #764ba2); width: 70px; height: 50px; border-radius: 6px;" title="linear-gradient(135deg, #667eea, #764ba2)"></div>
+              <div style="background: #e8401c; width: 70px; height: 50px; border-radius: 6px;" title="#e8401c"></div>
+              <div style="background: #1c6fe8; width: 70px; height: 50px; border-radius: 6px;" title="#1c6fe8"></div>
+              <div style="background: #22c55e; width: 70px; height: 50px; border-radius: 6px;" title="#22c55e"></div>
+              <div style="background: #f59e0b; width: 70px; height: 50px; border-radius: 6px;" title="#f59e0b"></div>
+              <div style="background: #9333ea; width: 70px; height: 50px; border-radius: 6px;" title="#9333ea"></div>
+              <div style="background: rgba(0,0,0,0.1); width: 70px; height: 50px; border-radius: 6px; border: 1px solid #ccc;" title="rgba(0,0,0,0.1) — transparent"></div>
+              <div style="background: transparent; width: 70px; height: 50px; border-radius: 6px; border: 2px dashed #ccc;" title="transparent"></div>
+              <div style="background: #0d0d0d; width: 70px; height: 50px; border-radius: 6px;" title="#0d0d0d"></div>
+              <div style="background: #f5f2eb; width: 70px; height: 50px; border-radius: 6px; border: 1px solid #ddd;" title="#f5f2eb (paper white)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 1.2 FONTS ===== -->
+    <section aria-labelledby="font-heading">
+      <div class="section-header">
+        <p class="section-num">1.2</p>
+        <h2 id="font-heading">Font Family</h2>
+        <p>The <code>font-family</code> property sets the typeface. Always include a fallback generic family: <code>serif</code>, <code>sans-serif</code>, or <code>monospace</code>.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">🔡</span>
+          <h3>Font Family Gallery</h3>
+          <span class="card-tag">font-family</span>
+        </div>
+        <div class="lab-card-body">
+
+          <div class="practice-zone">
+            <div style="display: grid; gap: var(--s4);">
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); margin-bottom: var(--s1);">font-family: 'Syne', sans-serif — (Google Font, Display)</p>
+                <p class="font-demo-display">The quick brown fox jumps over the lazy dog</p>
+              </div>
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); margin-bottom: var(--s1);">font-family: 'DM Sans', sans-serif — (Google Font, Body)</p>
+                <p class="font-demo-body">The quick brown fox jumps over the lazy dog</p>
+              </div>
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); margin-bottom: var(--s1);">font-family: 'Georgia', serif — (Web Safe)</p>
+                <p class="font-demo-serif">The quick brown fox jumps over the lazy dog</p>
+              </div>
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); margin-bottom: var(--s1);">font-family: 'JetBrains Mono', monospace — (Code Font)</p>
+                <p class="font-demo-mono">The quick brown fox jumps over the lazy dog</p>
+              </div>
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); margin-bottom: var(--s1);">font-family: 'Times New Roman', serif — (Web Safe)</p>
+                <p style="font-family: 'Times New Roman', serif; font-size: 1.2rem;">The quick brown fox jumps over the lazy dog</p>
+              </div>
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); margin-bottom: var(--s1);">font-family: 'Courier New', monospace — (Web Safe)</p>
+                <p style="font-family: 'Courier New', monospace; font-size: 1.1rem;">The quick brown fox jumps over the lazy dog</p>
+              </div>
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); margin-bottom: var(--s1);">font-family: cursive</p>
+                <p style="font-family: cursive; font-size: 1.3rem;">The quick brown fox jumps over the lazy dog</p>
+              </div>
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); margin-bottom: var(--s1);">font-family: fantasy</p>
+                <p style="font-family: fantasy; font-size: 1.3rem;">The quick brown fox jumps over the lazy dog</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout callout-tip">
+            <span class="callout-icon">🌐</span>
+            <div><strong>Loading Google Fonts:</strong> Add this to your <code>&lt;head&gt;</code>: <code>&lt;link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;800&display=swap" rel="stylesheet"&gt;</code> — then use <code>font-family: 'Syne', sans-serif;</code> in CSS.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 1.3 FONT SIZE ===== -->
+    <section aria-labelledby="fontsize-heading">
+      <div class="section-header">
+        <p class="section-num">1.3</p>
+        <h2 id="fontsize-heading">Font Size</h2>
+        <p>CSS has many size units. <code>rem</code> is relative to the root font size (16px by default). <code>em</code> is relative to the parent. <code>px</code> is fixed. <code>vw</code> is relative to viewport width.</p>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">📏</span>
+          <h3>Font Size Scale</h3>
+          <span class="card-tag">font-size</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <div style="display: flex; flex-direction: column; gap: var(--s4);">
+              <div style="display: flex; align-items: baseline; gap: var(--s4);">
+                <code style="min-width: 120px; font-size: 0.8rem;">0.75rem (12px)</code>
+                <span class="fsize-xs">The quick brown fox</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s4);">
+                <code style="min-width: 120px; font-size: 0.8rem;">0.875rem (14px)</code>
+                <span class="fsize-sm">The quick brown fox</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s4);">
+                <code style="min-width: 120px; font-size: 0.8rem;">1rem (16px)</code>
+                <span class="fsize-base">The quick brown fox</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s4);">
+                <code style="min-width: 120px; font-size: 0.8rem;">1.25rem (20px)</code>
+                <span class="fsize-lg">The quick brown fox</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s4);">
+                <code style="min-width: 120px; font-size: 0.8rem;">1.5rem (24px)</code>
+                <span class="fsize-xl">The quick brown fox</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s4);">
+                <code style="min-width: 120px; font-size: 0.8rem;">1.875rem (30px)</code>
+                <span class="fsize-2xl">Quick brown fox</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s4);">
+                <code style="min-width: 120px; font-size: 0.8rem;">2.25rem (36px)</code>
+                <span class="fsize-3xl">Quick fox</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s4);">
+                <code style="min-width: 120px; font-size: 0.8rem;">3rem (48px)</code>
+                <span class="fsize-4xl" style="font-weight:800; font-family: var(--font-display);">Fox</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s4);">
+                <code style="min-width: 120px; font-size: 0.8rem;">4rem (64px)</code>
+                <span class="fsize-5xl" style="font-weight:900; font-family: var(--font-display);">Aa</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s4);">
+                <code style="min-width: 120px; font-size: 0.8rem;">3vw</code>
+                <span style="font-size: 3vw;">Scales with window width</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s4);">
+                <code style="min-width: 120px; font-size: 0.8rem;">clamp(1rem,3vw,2.5rem)</code>
+                <span style="font-size: clamp(1rem, 3vw, 2.5rem);">Fluid — resize the window!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 1.4 FONT WEIGHT ===== -->
+    <section aria-labelledby="weight-heading">
+      <div class="section-header">
+        <p class="section-num">1.4</p>
+        <h2 id="weight-heading">Font Weight</h2>
+        <p>Values from <code>100</code> (thin) to <code>900</code> (black). Named values: <code>normal</code> (=400) and <code>bold</code> (=700). Only weights loaded by the font are available.</p>
+      </div>
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">🏋️</span>
+          <h3>Weight Scale</h3>
+          <span class="card-tag">font-weight</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <div style="display: flex; flex-direction: column; gap: var(--s3);">
+              <div style="display: flex; align-items: baseline; gap: var(--s5);">
+                <code style="min-width: 100px; font-size: 0.8rem;">100 — Thin</code>
+                <span style="font-weight: 100; font-size: 1.4rem; font-family: var(--font-display);">WebDev Lab</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s5);">
+                <code style="min-width: 100px; font-size: 0.8rem;">200 — ExtraLight</code>
+                <span style="font-weight: 200; font-size: 1.4rem; font-family: var(--font-display);">WebDev Lab</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s5);">
+                <code style="min-width: 100px; font-size: 0.8rem;">300 — Light</code>
+                <span style="font-weight: 300; font-size: 1.4rem; font-family: var(--font-display);">WebDev Lab</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s5);">
+                <code style="min-width: 100px; font-size: 0.8rem;">400 — Regular</code>
+                <span style="font-weight: 400; font-size: 1.4rem; font-family: var(--font-display);">WebDev Lab</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s5);">
+                <code style="min-width: 100px; font-size: 0.8rem;">500 — Medium</code>
+                <span style="font-weight: 500; font-size: 1.4rem; font-family: var(--font-display);">WebDev Lab</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s5);">
+                <code style="min-width: 100px; font-size: 0.8rem;">600 — SemiBold</code>
+                <span style="font-weight: 600; font-size: 1.4rem; font-family: var(--font-display);">WebDev Lab</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s5);">
+                <code style="min-width: 100px; font-size: 0.8rem;">700 — Bold</code>
+                <span style="font-weight: 700; font-size: 1.4rem; font-family: var(--font-display);">WebDev Lab</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s5);">
+                <code style="min-width: 100px; font-size: 0.8rem;">800 — ExtraBold</code>
+                <span style="font-weight: 800; font-size: 1.4rem; font-family: var(--font-display);">WebDev Lab</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: var(--s5);">
+                <code style="min-width: 100px; font-size: 0.8rem;">900 — Black</code>
+                <span style="font-weight: 900; font-size: 1.4rem; font-family: var(--font-display);">WebDev Lab</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 1.5 SPACING ===== -->
+    <section aria-labelledby="spacing-heading">
+      <div class="section-header">
+        <p class="section-num">1.5</p>
+        <h2 id="spacing-heading">Letter &amp; Line Spacing</h2>
+        <p><code>letter-spacing</code> adjusts space between characters. <code>line-height</code> controls vertical space between lines. <code>word-spacing</code> adds space between words.</p>
+      </div>
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">↔️</span>
+          <h3>Spacing Lab</h3>
+          <span class="card-tag">letter-spacing · line-height</span>
+        </div>
+        <div class="lab-card-body">
+          <p style="font-weight: 700; margin-bottom: var(--s3);">Letter Spacing:</p>
+          <div class="practice-zone">
+            <p class="ls-tight" style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: var(--s3);">letter-spacing: -0.05em — Tight</p>
+            <p class="ls-normal" style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: var(--s3);">letter-spacing: 0 — Normal</p>
+            <p class="ls-wide" style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: var(--s3);">letter-spacing: 0.1em — Wide</p>
+            <p class="ls-wider" style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: var(--s3);">letter-spacing: 0.2em — Wider</p>
+            <p class="ls-widest" style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: var(--s3);">WIDEST — 0.4em</p>
+          </div>
+
+          <p style="font-weight: 700; margin-bottom: var(--s3); margin-top: var(--s4);">Line Height:</p>
+          <div class="practice-zone" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4);">
+            <div>
+              <code style="font-size: 0.75rem; display: block; margin-bottom: var(--s2);">line-height: 1 (tight)</code>
+              <p class="lh-tight">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+            </div>
+            <div>
+              <code style="font-size: 0.75rem; display: block; margin-bottom: var(--s2);">line-height: 1.3 (snug)</code>
+              <p class="lh-snug">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+            </div>
+            <div>
+              <code style="font-size: 0.75rem; display: block; margin-bottom: var(--s2);">line-height: 1.5 (normal ✓)</code>
+              <p class="lh-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+            </div>
+            <div>
+              <code style="font-size: 0.75rem; display: block; margin-bottom: var(--s2);">line-height: 1.75 (relaxed)</code>
+              <p class="lh-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+            </div>
+            <div>
+              <code style="font-size: 0.75rem; display: block; margin-bottom: var(--s2);">line-height: 2 (loose)</code>
+              <p class="lh-loose">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 1.6 TEXT DECORATION ===== -->
+    <section aria-labelledby="deco-heading">
+      <div class="section-header">
+        <p class="section-num">1.6</p>
+        <h2 id="deco-heading">Text Decoration, Transform &amp; Align</h2>
+      </div>
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">🎀</span>
+          <h3>Decoration &amp; Transform Gallery</h3>
+          <span class="card-tag">text-decoration · text-transform · text-align</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--s4);">
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); margin-bottom: var(--s3);">text-decoration</p>
+                <p class="deco-underline" style="margin-bottom:var(--s3);">underline</p>
+                <p class="deco-overline" style="margin-bottom:var(--s3);">overline</p>
+                <p class="deco-through" style="margin-bottom:var(--s3);">line-through</p>
+                <p class="deco-wavy" style="margin-bottom:var(--s3);">wavy underline</p>
+                <p class="deco-dotted" style="margin-bottom:var(--s3);">dotted underline</p>
+                <p class="deco-double" style="margin-bottom:var(--s3);">double underline</p>
+              </div>
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); margin-bottom: var(--s3);">text-transform</p>
+                <p class="tt-upper" style="margin-bottom:var(--s3);">uppercase text</p>
+                <p class="tt-lower" style="margin-bottom:var(--s3);">LOWERCASE TEXT</p>
+                <p class="tt-cap" style="margin-bottom:var(--s3);">capitalize each word</p>
+              </div>
+              <div>
+                <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); margin-bottom: var(--s3);">text-align</p>
+                <p class="ta-left" style="margin-bottom:var(--s3); border: 1px solid var(--border); padding: 4px;">Left aligned text</p>
+                <p class="ta-center" style="margin-bottom:var(--s3); border: 1px solid var(--border); padding: 4px;">Center aligned</p>
+                <p class="ta-right" style="margin-bottom:var(--s3); border: 1px solid var(--border); padding: 4px;">Right aligned text</p>
+                <p class="ta-justify" style="margin-bottom:var(--s3); border: 1px solid var(--border); padding: 4px;">Justified — text spreads to fill the line, both edges flush.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ===== 1.7 TEXT SHADOW ===== -->
+    <section aria-labelledby="tshadow-heading">
+      <div class="section-header">
+        <p class="section-num">1.7</p>
+        <h2 id="tshadow-heading">Text Shadow &amp; Gradient Text</h2>
+        <p><code>text-shadow: x y blur color</code>. Stack multiple shadows with commas. Gradient text uses <code>background-clip: text</code>.</p>
+      </div>
+      <div class="lab-card">
+        <div class="lab-card-header">
+          <span class="card-icon">💫</span>
+          <h3>Shadow &amp; Gradient Effects</h3>
+          <span class="card-tag">text-shadow · gradient text</span>
+        </div>
+        <div class="lab-card-body">
+          <div class="practice-zone" style="background: var(--ink); padding: var(--s6);">
+            <div style="display: flex; flex-direction: column; gap: var(--s5);">
+              <div>
+                <code style="font-size: 0.72rem; color: var(--muted); display: block; margin-bottom: var(--s2);">text-shadow: 2px 2px 4px rgba(0,0,0,0.5)</code>
+                <p class="tshadow-1" style="color: white;">Drop Shadow Text</p>
+              </div>
+              <div>
+                <code style="font-size: 0.72rem; color: var(--muted); display: block; margin-bottom: var(--s2);">text-shadow: 0 0 20px #e8401c, 0 0 40px #e8401c — Glow</code>
+                <p class="tshadow-2">Neon Glow Text</p>
+              </div>
+              <div>
+                <code style="font-size: 0.72rem; color: var(--muted); display: block; margin-bottom: var(--s2);">text-shadow: 3px 3px 0 #000 — Hard Shadow</code>
+                <p class="tshadow-3" style="color: white;">Hard Offset Shadow</p>
+              </div>
+              <div>
+                <code style="font-size: 0.72rem; color: var(--muted); display: block; margin-bottom: var(--s2);">text-shadow: outline trick (4 shadows)</code>
+                <p class="tshadow-4">Outlined Text Effect</p>
+              </div>
+              <div>
+                <code style="font-size: 0.72rem; color: var(--muted); display: block; margin-bottom: var(--s2);">text-shadow: 0 4px 8px rgba(0,0,0,0.3) — Soft</code>
+                <p class="tshadow-5" style="color: white;">Soft Depth Shadow</p>
+              </div>
+              <div>
+                <code style="font-size: 0.72rem; color: var(--muted); display: block; margin-bottom: var(--s2);">Gradient Text — background-clip: text</code>
+                <p class="gradient-text-1">Fire Gradient</p>
+                <p class="gradient-text-2">Rainbow Gradient</p>
+              </div>
+            </div>
+          </div>
+          <div class="callout callout-warn">
+            <span class="callout-icon">⚠️</span>
+            <div>Gradient text requires <code>-webkit-background-clip: text</code> AND <code>-webkit-text-fill-color: transparent</code> for broad browser support. Always add both prefixed and unprefixed versions.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next / Prev nav -->
+    <div style="display: flex; justify-content: flex-end; margin-top: var(--s8);">
+      <a href="02-boxmodel.html" style="display:inline-flex; align-items:center; gap: var(--s3); background: var(--ink); color: var(--paper); padding: var(--s3) var(--s5); border-radius: var(--r-full); font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: background 0.2s;" onmouseover="this.style.background='#e8401c'" onmouseout="this.style.background='#0d0d0d'">
+        Next: Box Model →
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <p><strong>WebDev Lab</strong> — Module 01: Typography &amp; Text</p>
+    <p style="margin-top:0.5rem;"><a href="../index.html">← Back to all modules</a></p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Meta Tags — study these! -->
+  <title>WebDev Lab — Your HTML & CSS Learning Path</title>
+  <meta name="description" content="An interactive, hands-on HTML and CSS learning lab. Practice changing colors, fonts, layouts, animations, and more — directly in the browser.">
+  <meta name="keywords" content="HTML, CSS, web development, learning, tutorial, beginner, practice">
+  <meta name="author" content="Your Name Here">
+
+  <!-- Open Graph (for social sharing) -->
+  <meta property="og:title" content="WebDev Lab — HTML & CSS Learning Path">
+  <meta property="og:description" content="Hands-on HTML and CSS practice — edit code, see results, learn faster.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourname.github.io/webdev-lab">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WebDev Lab — HTML & CSS Learning Path">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://yourname.github.io/webdev-lab/index.html">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/labs.css">
+
+  <style>
+    /* ---- Home-page specific styles ---- */
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--s5);
+      margin-top: var(--s6);
+    }
+
+    .module-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--s5);
+      text-decoration: none;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: var(--s3);
+      transition: all 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .module-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+      opacity: 0.04;
+      z-index: 0;
+    }
+
+    .module-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      text-decoration: none;
+    }
+
+    .module-card:hover::before { transform: scaleX(1); }
+
+    .module-emoji {
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    .module-num {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .module-card h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      position: relative;
+    }
+
+    .module-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.5;
+      position: relative;
+    }
+
+    .module-card .topic-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s1);
+      position: relative;
+    }
+
+    .topic-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      background: var(--paper);
+      border: 1.5px solid var(--border);
+      padding: 1px 6px;
+      border-radius: var(--r-full);
+      color: var(--muted);
+    }
+
+    .module-card .arrow {
+      margin-top: auto;
+      font-size: 1.1rem;
+      color: var(--accent);
+      transition: transform 0.2s;
+      position: relative;
+    }
+
+    .module-card:hover .arrow { transform: translateX(5px); }
+
+    /* Hero stats */
+    .hero-stats {
+      display: flex;
+      gap: var(--s6);
+      flex-wrap: wrap;
+      margin-top: var(--s6);
+      position: relative;
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .hero-stat .stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--paper);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .hero-stat .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .how-to-use {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: var(--s6) var(--s7);
+      margin: var(--s7) 0;
+    }
+
+    .how-to-use h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: var(--s5);
+    }
+
+    .steps-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--s4);
+    }
+
+    .steps-list li {
+      display: flex;
+      gap: var(--s4);
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .step-text strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+
+    .step-text span {
+      font-size: 0.87rem;
+      color: var(--muted);
+    }
+
+    /* Path ribbon */
+    .path-ribbon {
+      background: var(--accent);
+      color: white;
+      padding: var(--s4) var(--s6);
+      border-radius: var(--r-md);
+      font-size: 0.9rem;
+      margin-bottom: var(--s5);
+      display: flex;
+      align-items: center;
+      gap: var(--s3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo">WebDev<span>Lab</span></a>
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="pages/01-typography.html">Typography</a></li>
+      <li><a href="pages/02-boxmodel.html">Box Model</a></li>
+      <li><a href="pages/03-layouts.html">Layouts</a></li>
+      <li><a href="pages/04-media.html">Media</a></li>
+      <li><a href="pages/05-animations.html">Animations</a></li>
+      <li><a href="pages/06-seo.html">SEO</a></li>
+      <li><a href="pages/07-advanced.html">Advanced CSS</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="page-hero" role="banner">
+    <div class="hero-tag">Interactive Learning Lab</div>
+    <h1>Master <em>HTML & CSS</em><br>by actually doing it.</h1>
+    <p>No videos. No lectures. Open any file in VS Code, change the code, save, and watch what happens. This is how real developers learn.</p>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-num">8</span>
+        <span class="stat-label">Modules</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-num">120+</span>
+        <span class="stat-label">Live Examples</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">HTML & CSS Only</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-num">0</span>
+        <span class="stat-label">Setup Required</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="lab-container">
+
+    <!-- How to use -->
+    <div class="how-to-use">
+      <h2>🔧 How to Use This Lab</h2>
+      <ol class="steps-list">
+        <li>
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>Open this folder in VS Code</strong>
+            <span>Right-click the <code>webdev-lab</code> folder → "Open with Code"</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>Open any .html file and its matching .css file side by side</strong>
+            <span>Use the split-editor view (Ctrl+\ or Cmd+\)</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <strong>Install "Live Server" extension and hit Go Live</strong>
+            <span>Your browser will auto-refresh every time you save a file</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">4</div>
+          <div class="step-text">
+            <strong>Find any <code>✏️ Practice Zone</code> box and change the values</strong>
+            <span>Every property shown has a comment telling you what to try changing</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">5</div>
+          <div class="step-text">
+            <strong>Break things. Fix them. That's the whole plan.</strong>
+            <span>Use git to save snapshots of your progress. Push to GitHub Pages to share!</span>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Module Grid -->
+    <div class="section-header">
+      <p class="section-num">Learning Path</p>
+      <h2>Choose Your Module</h2>
+      <p>Each module builds on the last — but feel free to jump around based on what you need.</p>
+    </div>
+
+    <nav class="module-grid" aria-label="Course modules">
+
+      <a href="pages/01-typography.html" class="module-card">
+        <div class="module-emoji">🔤</div>
+        <div class="module-num">Module 01</div>
+        <h3>Typography & Text</h3>
+        <p>Colors, fonts, sizes, weights, spacing, shadows, transforms — everything text.</p>
+        <div class="topic-tags">
+          <span class="topic-tag">color</span>
+          <span class="topic-tag">font-family</span>
+          <span class="topic-tag">font-size</span>
+          <span class="topic-tag">text-shadow</span>
+          <span class="topic-tag">gradient text</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a href="pages/02-boxmodel.html" class="module-card">
+        <div class="module-emoji">📦</div>
+        <div class="module-num">Module 02</div>
+        <h3>The Box Model</h3>
+        <p>Margins, padding, borders, border-radius, box-sizing, shadows — master the box.</p>
+        <div class="topic-tags">
+          <span class="topic-tag">margin</span>
+          <span class="topic-tag">padding</span>
+          <span class="topic-tag">border</span>
+          <span class="topic-tag">box-shadow</span>
+          <span class="topic-tag">overflow</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a href="pages/03-layouts.html" class="module-card">
+        <div class="module-emoji">🗂️</div>
+        <div class="module-num">Module 03</div>
+        <h3>Layouts: Flex & Grid</h3>
+        <p>Flexbox, CSS Grid, positioning, display, z-index — build any layout.</p>
+        <div class="topic-tags">
+          <span class="topic-tag">flexbox</span>
+          <span class="topic-tag">grid</span>
+          <span class="topic-tag">position</span>
+          <span class="topic-tag">z-index</span>
+          <span class="topic-tag">display</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a href="pages/04-media.html" class="module-card">
+        <div class="module-emoji">🖼️</div>
+        <div class="module-num">Module 04</div>
+        <h3>Images & Video</h3>
+        <p>Insert images, change them, control object-fit, add filters, embed and control video.</p>
+        <div class="topic-tags">
+          <span class="topic-tag">img</span>
+          <span class="topic-tag">object-fit</span>
+          <span class="topic-tag">filter</span>
+          <span class="topic-tag">video</span>
+          <span class="topic-tag">iframe</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a href="pages/05-animations.html" class="module-card">
+        <div class="module-emoji">✨</div>
+        <div class="module-num">Module 05</div>
+        <h3>Transitions & Animations</h3>
+        <p>CSS transitions, @keyframes animations, transforms — bring things to life.</p>
+        <div class="topic-tags">
+          <span class="topic-tag">transition</span>
+          <span class="topic-tag">@keyframes</span>
+          <span class="topic-tag">transform</span>
+          <span class="topic-tag">animation</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a href="pages/06-seo.html" class="module-card">
+        <div class="module-emoji">🔍</div>
+        <div class="module-num">Module 06</div>
+        <h3>SEO & Semantic HTML</h3>
+        <p>Semantic tags, meta tags, Open Graph, heading hierarchy, accessibility, CLS.</p>
+        <div class="topic-tags">
+          <span class="topic-tag">semantic</span>
+          <span class="topic-tag">meta</span>
+          <span class="topic-tag">CLS</span>
+          <span class="topic-tag">aria</span>
+          <span class="topic-tag">schema</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a href="pages/07-advanced.html" class="module-card">
+        <div class="module-emoji">🧠</div>
+        <div class="module-num">Module 07</div>
+        <h3>Advanced CSS</h3>
+        <p>CSS variables, pseudo-elements, selectors, specificity, shapes, counters, scroll.</p>
+        <div class="topic-tags">
+          <span class="topic-tag">:root vars</span>
+          <span class="topic-tag">::before</span>
+          <span class="topic-tag">specificity</span>
+          <span class="topic-tag">clip-path</span>
+          <span class="topic-tag">counter</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a href="pages/08-responsive.html" class="module-card">
+        <div class="module-emoji">📱</div>
+        <div class="module-num">Module 08</div>
+        <h3>Responsive Design</h3>
+        <p>Media queries, fluid typography, responsive images, viewport units, mobile-first.</p>
+        <div class="topic-tags">
+          <span class="topic-tag">@media</span>
+          <span class="topic-tag">clamp()</span>
+          <span class="topic-tag">viewport</span>
+          <span class="topic-tag">srcset</span>
+          <span class="topic-tag">mobile-first</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+    </nav>
+
+    <hr>
+
+    <!-- Quick reference table -->
+    <div class="section-header">
+      <p class="section-num">Quick Reference</p>
+      <h2>Most-Used CSS Properties</h2>
+      <p>Bookmark this. You'll come back to it constantly.</p>
+    </div>
+
+    <table class="table-demo">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>What It Does</th>
+          <th>Example Value</th>
+          <th>Module</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>color</code></td><td>Text color</td><td><code>#e8401c</code> or <code>red</code></td><td>01</td></tr>
+        <tr><td><code>background-color</code></td><td>Background fill</td><td><code>rgba(0,0,0,0.5)</code></td><td>01</td></tr>
+        <tr><td><code>font-family</code></td><td>Typeface choice</td><td><code>'Syne', sans-serif</code></td><td>01</td></tr>
+        <tr><td><code>font-size</code></td><td>Text size</td><td><code>1.5rem</code>, <code>clamp(1rem, 3vw, 2rem)</code></td><td>01</td></tr>
+        <tr><td><code>font-weight</code></td><td>Bold/thin</td><td><code>100</code>–<code>900</code></td><td>01</td></tr>
+        <tr><td><code>margin</code></td><td>Space outside element</td><td><code>0 auto</code>, <code>16px</code></td><td>02</td></tr>
+        <tr><td><code>padding</code></td><td>Space inside element</td><td><code>1rem 2rem</code></td><td>02</td></tr>
+        <tr><td><code>border</code></td><td>Edge line</td><td><code>2px solid #000</code></td><td>02</td></tr>
+        <tr><td><code>border-radius</code></td><td>Rounded corners</td><td><code>8px</code>, <code>50%</code></td><td>02</td></tr>
+        <tr><td><code>display</code></td><td>Rendering type</td><td><code>flex</code>, <code>grid</code>, <code>block</code></td><td>03</td></tr>
+        <tr><td><code>flex</code></td><td>Flex shorthand</td><td><code>1</code>, <code>0 0 200px</code></td><td>03</td></tr>
+        <tr><td><code>grid-template-columns</code></td><td>Grid column sizes</td><td><code>repeat(3, 1fr)</code></td><td>03</td></tr>
+        <tr><td><code>position</code></td><td>Positioning mode</td><td><code>relative</code>, <code>absolute</code></td><td>03</td></tr>
+        <tr><td><code>transition</code></td><td>Animate changes</td><td><code>all 0.3s ease</code></td><td>05</td></tr>
+        <tr><td><code>transform</code></td><td>Rotate, scale, move</td><td><code>translateY(-8px)</code></td><td>05</td></tr>
+        <tr><td><code>opacity</code></td><td>Transparency</td><td><code>0</code>–<code>1</code></td><td>07</td></tr>
+        <tr><td><code>z-index</code></td><td>Stack order</td><td><code>10</code>, <code>-1</code></td><td>03</td></tr>
+        <tr><td><code>object-fit</code></td><td>Image fit inside box</td><td><code>cover</code>, <code>contain</code></td><td>04</td></tr>
+        <tr><td><code>filter</code></td><td>Visual effects on images</td><td><code>grayscale(100%)</code></td><td>04</td></tr>
+        <tr><td><code>overflow</code></td><td>Content clipping</td><td><code>hidden</code>, <code>scroll</code></td><td>02</td></tr>
+      </tbody>
+    </table>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <p><strong>WebDev Lab</strong> — Your personal HTML &amp; CSS learning path.</p>
+    <p style="margin-top:0.5rem;">Built with pure HTML &amp; CSS. No frameworks. No build steps. <a href="https://github.com">Push to GitHub Pages</a> and share your progress.</p>
+  </footer>
+
+</body>
+</html>

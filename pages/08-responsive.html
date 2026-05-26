@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>08 — Responsive Design | WebDev Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/labs.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="../index.html" class="nav-logo">WebDev<span>Lab</span></a>
+    <div class="nav-links">
+      <a href="01-typography.html">Typography</a>
+      <a href="02-boxmodel.html">Box Model</a>
+      <a href="03-layouts.html">Layouts</a>
+      <a href="04-media.html">Media</a>
+      <a href="05-animations.html">Animations</a>
+      <a href="06-seo.html">SEO</a>
+      <a href="07-advanced.html">Advanced</a>
+      <a href="08-responsive.html" class="active">Responsive</a>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <span>Module 08</span></div>
+    <div class="hero-label">Module 08</div>
+    <h1>Responsive <em>Design</em></h1>
+    <p>Your page needs to work beautifully on a 320px phone and a 4K monitor. Media queries, fluid typography with clamp(), responsive images, viewport units, and mobile-first strategy.</p>
+  </header>
+
+  <main class="page-content">
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 1: MOBILE FIRST
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2>Mobile-First Approach</h2>
+      </div>
+      <p>Write your base CSS for the smallest screen first. Then use <code>min-width</code> media queries to progressively enhance for larger screens. This is <strong>mobile-first</strong>.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Mobile-First vs Desktop-First</div>
+        <div class="lab-card-body">
+          <div class="mf-compare">
+            <div class="mf-col">
+              <div class="mf-label good">✅ Mobile-First (Preferred)</div>
+              <div class="code-block">
+<pre><code>/* Base: mobile (single column) */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Bigger screens get more columns */
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}</code></pre>
+              </div>
+            </div>
+            <div class="mf-col">
+              <div class="mf-label warn">⚠️ Desktop-First (Avoid)</div>
+              <div class="code-block">
+<pre><code>/* Base: desktop (3 columns) */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+/* Override down for smaller screens */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}</code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="callout-tip">
+            <strong>Why mobile-first?</strong> Mobile has constraints (small screen, slower connection). Start minimal, add complexity only when you have the space for it. Also: Google indexes the mobile version of your site first.
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 2: MEDIA QUERIES
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2>Media Queries</h2>
+      </div>
+      <p>Media queries let you apply CSS conditionally based on device characteristics — mostly screen width, but also orientation, resolution, and user preferences.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Common Breakpoints</div>
+        <div class="lab-card-body">
+          <div class="breakpoints-visual">
+            <div class="bp-item bp-xs">
+              <div class="bp-icon">📱</div>
+              <div class="bp-label">XS</div>
+              <div class="bp-range">&lt; 480px</div>
+              <div class="bp-desc">Small phones</div>
+            </div>
+            <div class="bp-item bp-sm">
+              <div class="bp-icon">📱</div>
+              <div class="bp-label">SM</div>
+              <div class="bp-range">480–767px</div>
+              <div class="bp-desc">Large phones</div>
+            </div>
+            <div class="bp-item bp-md">
+              <div class="bp-icon">💻</div>
+              <div class="bp-label">MD</div>
+              <div class="bp-range">768–1023px</div>
+              <div class="bp-desc">Tablets</div>
+            </div>
+            <div class="bp-item bp-lg">
+              <div class="bp-icon">🖥️</div>
+              <div class="bp-label">LG</div>
+              <div class="bp-range">1024–1279px</div>
+              <div class="bp-desc">Laptops</div>
+            </div>
+            <div class="bp-item bp-xl">
+              <div class="bp-icon">🖥️</div>
+              <div class="bp-label">XL</div>
+              <div class="bp-range">1280–1535px</div>
+              <div class="bp-desc">Desktops</div>
+            </div>
+            <div class="bp-item bp-2xl">
+              <div class="bp-icon">📺</div>
+              <div class="bp-label">2XL</div>
+              <div class="bp-range">≥ 1536px</div>
+              <div class="bp-desc">Wide screens</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Media Query Live Indicator</div>
+        <div class="lab-card-body">
+          <p>Resize your browser window to see which breakpoint is active. Each box shows/hides based on viewport width.</p>
+          <div class="mq-indicator-bar">
+            <div class="mq-ind mq-ind-xs">xs (&lt;480px)</div>
+            <div class="mq-ind mq-ind-sm">sm (480px+)</div>
+            <div class="mq-ind mq-ind-md">md (768px+)</div>
+            <div class="mq-ind mq-ind-lg">lg (1024px+)</div>
+            <div class="mq-ind mq-ind-xl">xl (1280px+)</div>
+          </div>
+          <div class="callout-info">The <strong>highlighted box</strong> changes as you resize. Open DevTools and drag the window width.</div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Media Query Syntax Reference</div>
+        <div class="lab-card-body">
+          <div class="code-block">
+<pre><code>/* Width-based (most common) */
+@media (min-width: 768px) { /* 768px and wider */ }
+@media (max-width: 767px) { /* 767px and narrower */ }
+@media (min-width: 480px) and (max-width: 767px) { /* Range */ }
+
+/* Orientation */
+@media (orientation: portrait)  { /* Phone held upright */ }
+@media (orientation: landscape) { /* Phone held sideways */ }
+
+/* Resolution (for high-DPI / Retina displays) */
+@media (-webkit-min-device-pixel-ratio: 2),
+       (min-resolution: 192dpi) {
+  /* Use @2x images for retina */
+}
+
+/* User preference queries */
+@media (prefers-color-scheme: dark)    { /* Dark mode */ }
+@media (prefers-reduced-motion: reduce) { /* Less animation */ }
+@media (prefers-contrast: high)        { /* High contrast */ }
+@media (hover: none)                   { /* Touch device */ }
+@media (hover: hover)                  { /* Has a mouse */ }</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">✏️ Practice — Responsive Cards</div>
+        <div class="lab-card-body practice-zone">
+          <p>The card grid below is already responsive. Try resizing your browser to see it adapt. Then open <code>labs.css</code>, find <code>.practice-responsive-grid</code>, and change the breakpoints or column counts.</p>
+          <div class="output-zone">
+            <div class="practice-responsive-grid">
+              <div class="practice-r-card">Card 1</div>
+              <div class="practice-r-card">Card 2</div>
+              <div class="practice-r-card">Card 3</div>
+              <div class="practice-r-card">Card 4</div>
+              <div class="practice-r-card">Card 5</div>
+              <div class="practice-r-card">Card 6</div>
+            </div>
+          </div>
+          <div class="code-block">
+<pre><code>/* Mobile: 1 column (default) */
+.practice-responsive-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+/* Tablet: 2 columns */
+@media (min-width: 600px) {
+  .practice-responsive-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+/* Desktop: 3 columns */
+@media (min-width: 960px) {
+  .practice-responsive-grid {
+    grid-template-columns: 1fr 1fr 1fr; /* ← Try: 1fr 1fr 1fr 1fr */
+  }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 3: FLUID TYPOGRAPHY WITH CLAMP()
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2>Fluid Typography with clamp()</h2>
+      </div>
+      <p>Instead of jumping between fixed sizes at breakpoints, <code>clamp()</code> creates fluid values that scale smoothly between a minimum and maximum based on the viewport width.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">clamp() Syntax</div>
+        <div class="lab-card-body">
+          <div class="code-block">
+<pre><code>/* clamp(minimum, preferred, maximum) */
+font-size: clamp(1rem, 4vw, 2.5rem);
+/*              ↑min  ↑scales  ↑max  */
+
+/* Real-world examples */
+h1 { font-size: clamp(1.8rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.4rem, 3.5vw, 2.5rem); }
+p  { font-size: clamp(0.9rem, 2vw, 1.1rem); }
+
+/* Padding that scales too */
+.hero {
+  padding: clamp(2rem, 8vw, 8rem);
+}
+
+/* Gap that adjusts */
+.grid {
+  gap: clamp(12px, 3vw, 32px);
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">clamp() Live Demo</div>
+        <div class="lab-card-body">
+          <p>Resize your browser window. This heading scales fluidly — no media query jumps.</p>
+          <div class="clamp-demo-text">Fluid Heading</div>
+          <div class="clamp-scale-visual">
+            <div class="csv-min">Min: 1.5rem (mobile)</div>
+            <div class="csv-arrow">↔ scales with viewport ↔</div>
+            <div class="csv-max">Max: 4rem (desktop)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">✏️ Practice — Fluid Sizing</div>
+        <div class="lab-card-body practice-zone">
+          <p>Find <code>.my-fluid-text</code> in <code>labs.css</code>. Change the min/preferred/max values in <code>clamp()</code> and resize your browser to see the effect.</p>
+          <div class="output-zone">
+            <div class="my-fluid-text">This Text Scales Fluidly</div>
+            <div class="my-fluid-box">This box padding also uses clamp()</div>
+          </div>
+          <div class="code-block">
+<pre><code>/* In labs.css */
+.my-fluid-text {
+  font-size: clamp(1rem, 5vw, 3rem);
+  /* Try: clamp(0.8rem, 3vw, 2rem) */
+  /* Try: clamp(2rem, 8vw, 6rem)   */
+}
+.my-fluid-box {
+  padding: clamp(8px, 3vw, 48px);
+  background: var(--accent);
+  color: white;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 4: VIEWPORT UNITS
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2>Viewport Units</h2>
+      </div>
+      <p>Viewport units are relative to the browser window size — not the parent element. Useful for full-screen sections and responsive sizing without media queries.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Viewport Unit Reference</div>
+        <div class="lab-card-body">
+          <div class="vp-units-grid">
+            <div class="vpu-card">
+              <div class="vpu-name"><code>vw</code></div>
+              <div class="vpu-def">1% of viewport <strong>width</strong></div>
+              <div class="vpu-example"><code>100vw</code> = full window width</div>
+              <div class="vpu-use">Full-width headers, horizontal spacing</div>
+            </div>
+            <div class="vpu-card">
+              <div class="vpu-name"><code>vh</code></div>
+              <div class="vpu-def">1% of viewport <strong>height</strong></div>
+              <div class="vpu-example"><code>100vh</code> = full window height</div>
+              <div class="vpu-use">Full-screen hero sections</div>
+            </div>
+            <div class="vpu-card">
+              <div class="vpu-name"><code>vmin</code></div>
+              <div class="vpu-def">1% of the <strong>smaller</strong> dimension</div>
+              <div class="vpu-example">Phone portrait: 1vmin = 1vw</div>
+              <div class="vpu-use">Square elements that scale with orientation</div>
+            </div>
+            <div class="vpu-card">
+              <div class="vpu-name"><code>vmax</code></div>
+              <div class="vpu-def">1% of the <strong>larger</strong> dimension</div>
+              <div class="vpu-example">Phone portrait: 1vmax = 1vh</div>
+              <div class="vpu-use">Background text / oversized decorative elements</div>
+            </div>
+            <div class="vpu-card">
+              <div class="vpu-name"><code>dvh</code></div>
+              <div class="vpu-def"><strong>Dynamic</strong> viewport height</div>
+              <div class="vpu-example">Adjusts for mobile browser chrome</div>
+              <div class="vpu-use">Modern mobile full-screen — use over <code>100vh</code></div>
+            </div>
+            <div class="vpu-card">
+              <div class="vpu-name"><code>svh</code></div>
+              <div class="vpu-def"><strong>Small</strong> viewport height</div>
+              <div class="vpu-example">The smallest possible viewport size</div>
+              <div class="vpu-use">Ensures content never goes behind browser UI</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">100vh on Mobile Problem</div>
+        <div class="lab-card-body">
+          <div class="callout-warn">
+            <strong>⚠️ Mobile Safari Problem:</strong> <code>100vh</code> on mobile includes the browser's address bar height, which disappears when you scroll. This causes the hero section to be too tall. Use <code>100dvh</code> instead — it dynamically adjusts.
+          </div>
+          <div class="code-block">
+<pre><code>/* Old way — causes overflow on mobile */
+.hero { height: 100vh; }
+
+/* Modern fix — use dynamic viewport height */
+.hero { height: 100dvh; }
+
+/* Fallback for older browsers */
+.hero {
+  height: 100vh; /* fallback */
+  height: 100dvh; /* modern override */
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 5: RESPONSIVE IMAGES
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2>Responsive Images</h2>
+      </div>
+      <p>Don't serve a 3000px image to a 375px phone screen. Use <code>srcset</code> and <code>sizes</code> to let the browser pick the right image automatically.</p>
+
+      <div class="lab-card">
+        <div class="lab-card-header">srcset — Serve the Right Resolution</div>
+        <div class="lab-card-body">
+          <div class="code-block">
+<pre><code>&lt;!-- Browser picks best image based on screen size & DPR --&gt;
+&lt;img
+  src="image-800.jpg"              &lt;!-- fallback --&gt;
+  srcset="
+    image-400.jpg  400w,           &lt;!-- 400px wide version --&gt;
+    image-800.jpg  800w,           &lt;!-- 800px wide version --&gt;
+    image-1600.jpg 1600w           &lt;!-- 1600px wide version --&gt;
+  "
+  sizes="
+    (max-width: 600px) 100vw,     &lt;!-- phones: full width --&gt;
+    (max-width: 1024px) 50vw,     &lt;!-- tablets: half width --&gt;
+    33vw                           &lt;!-- desktop: 1/3 width --&gt;
+  "
+  alt="Description"
+  width="800"
+  height="600"
+  loading="lazy"
+&gt;</code></pre>
+          </div>
+          <div class="callout-info">
+            <strong>How it works:</strong> The browser knows the image will be 50vw on tablet. On a Retina (2x DPI) tablet at 768px viewport, that's 384px × 2 = 768px needed. It picks the <code>800w</code> version as the best fit.
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">&lt;picture&gt; — Art Direction</div>
+        <div class="lab-card-body">
+          <p>Use <code>&lt;picture&gt;</code> when you want to show completely different images at different sizes — not just different resolutions of the same image.</p>
+          <div class="code-block">
+<pre><code>&lt;picture&gt;
+  &lt;!-- Portrait crop for mobile --&gt;
+  &lt;source media="(max-width: 600px)"
+          srcset="hero-portrait.jpg"&gt;
+
+  &lt;!-- Landscape crop for tablet --&gt;
+  &lt;source media="(max-width: 1024px)"
+          srcset="hero-landscape.jpg"&gt;
+
+  &lt;!-- WebP for modern browsers --&gt;
+  &lt;source type="image/webp"
+          srcset="hero.webp"&gt;
+
+  &lt;!-- Default fallback --&gt;
+  &lt;img src="hero.jpg" alt="Hero image"
+       width="1200" height="600"&gt;
+&lt;/picture&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">CSS max-width Pattern</div>
+        <div class="lab-card-body">
+          <p>The simplest responsive image technique — ensure images never overflow their container.</p>
+          <div class="code-block">
+<pre><code>/* Apply globally in your reset/base CSS */
+img {
+  max-width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Remove inline gap below images */
+}
+
+/* Responsive container patterns */
+.full-width-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.thumbnail {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 6: RESPONSIVE PATTERNS
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2>Responsive Layout Patterns</h2>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">auto-fill / auto-fit — Truly Responsive Grid</div>
+        <div class="lab-card-body">
+          <p>The most powerful responsive grid pattern — no media queries needed at all. The browser figures out how many columns fit.</p>
+          <div class="code-block">
+<pre><code>/* auto-fill: always creates columns, even empty ones */
+.grid-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* auto-fit: collapses empty columns, items stretch */
+.grid-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}</code></pre>
+          </div>
+          <p><strong>auto-fit demo:</strong> Resize your browser — no media queries, just flex:</p>
+          <div class="auto-fit-demo">
+            <div class="af-card">Item 1</div>
+            <div class="af-card">Item 2</div>
+            <div class="af-card">Item 3</div>
+            <div class="af-card">Item 4</div>
+            <div class="af-card">Item 5</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Sidebar Layout — Responsive</div>
+        <div class="lab-card-body">
+          <p>A classic sidebar that stacks to full-width on mobile.</p>
+          <div class="code-block">
+<pre><code>/* Mobile: stack vertically */
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+/* Desktop: sidebar fixed, main content flexible */
+@media (min-width: 768px) {
+  .sidebar-layout {
+    grid-template-columns: 240px 1fr;
+  }
+}</code></pre>
+          </div>
+          <div class="responsive-sidebar-demo">
+            <div class="rsd-sidebar">Sidebar</div>
+            <div class="rsd-main">Main Content</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Responsive Typography Scale</div>
+        <div class="lab-card-body">
+          <p>A complete fluid type scale using clamp() — define it once in <code>:root</code>, use everywhere.</p>
+          <div class="code-block">
+<pre><code>:root {
+  --text-xs:   clamp(0.64rem, 1.5vw, 0.75rem);
+  --text-sm:   clamp(0.8rem,  1.8vw, 0.875rem);
+  --text-base: clamp(0.9rem,  2vw,   1rem);
+  --text-lg:   clamp(1rem,    2.5vw, 1.125rem);
+  --text-xl:   clamp(1.1rem,  3vw,   1.25rem);
+  --text-2xl:  clamp(1.2rem,  3.5vw, 1.5rem);
+  --text-3xl:  clamp(1.5rem,  4vw,   1.875rem);
+  --text-4xl:  clamp(1.8rem,  5vw,   2.25rem);
+  --text-5xl:  clamp(2rem,    6vw,   3rem);
+}
+
+h1 { font-size: var(--text-5xl); }
+h2 { font-size: var(--text-4xl); }
+h3 { font-size: var(--text-3xl); }
+p  { font-size: var(--text-base); }
+small { font-size: var(--text-sm); }</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Container Queries — The Future</div>
+        <div class="lab-card-body">
+          <div class="callout-info">
+            <strong>New in 2023:</strong> Container queries let you style elements based on their <em>parent container's size</em> — not the viewport size. Perfect for reusable components.
+          </div>
+          <div class="code-block">
+<pre><code>/* Mark the container */
+.card-wrapper {
+  container-type: inline-size;
+  container-name: card;
+}
+
+/* Query the container */
+@container card (min-width: 400px) {
+  .card {
+    display: flex; /* Horizontal layout when wide enough */
+    flex-direction: row;
+  }
+  .card-image {
+    width: 200px;
+    flex-shrink: 0;
+  }
+}
+
+/* The card adapts to its container — not the viewport */
+/* Place it in a narrow sidebar: stacked layout */
+/* Place it in a wide main area: horizontal layout */</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 7: RESPONSIVE CHECKLIST
+    ═══════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <h2>Responsive Design Checklist</h2>
+      </div>
+
+      <div class="lab-card">
+        <div class="lab-card-header">Before You Ship — Check These</div>
+        <div class="lab-card-body">
+          <div class="checklist">
+            <div class="check-item">
+              <div class="check-icon">✅</div>
+              <div class="check-text"><strong>Viewport meta tag</strong> — <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code> in every HTML file</div>
+            </div>
+            <div class="check-item">
+              <div class="check-icon">✅</div>
+              <div class="check-text"><strong>Images have max-width: 100%</strong> — no overflow on small screens</div>
+            </div>
+            <div class="check-item">
+              <div class="check-icon">✅</div>
+              <div class="check-text"><strong>Images have width and height attributes</strong> — prevents CLS</div>
+            </div>
+            <div class="check-item">
+              <div class="check-icon">✅</div>
+              <div class="check-text"><strong>No horizontal scrollbar on mobile</strong> — check at 375px width</div>
+            </div>
+            <div class="check-item">
+              <div class="check-icon">✅</div>
+              <div class="check-text"><strong>Touch targets at least 44×44px</strong> — buttons and links must be tappable</div>
+            </div>
+            <div class="check-item">
+              <div class="check-icon">✅</div>
+              <div class="check-text"><strong>No fixed widths in px for layout</strong> — use %, fr, or min/max with clamp()</div>
+            </div>
+            <div class="check-item">
+              <div class="check-icon">✅</div>
+              <div class="check-text"><strong>Fonts readable on mobile</strong> — minimum 16px base to prevent zoom on iOS</div>
+            </div>
+            <div class="check-item">
+              <div class="check-icon">✅</div>
+              <div class="check-text"><strong>Test with DevTools device emulation</strong> — check at 375px, 768px, 1280px at minimum</div>
+            </div>
+            <div class="check-item">
+              <div class="check-icon">✅</div>
+              <div class="check-text"><strong>Check with real device</strong> — DevTools isn't perfect, always test on a real phone</div>
+            </div>
+            <div class="check-item">
+              <div class="check-icon">✅</div>
+              <div class="check-text"><strong>prefers-reduced-motion</strong> — disable heavy animations for users who prefer it</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-tip">
+        <strong>🎉 Congratulations!</strong> You've completed all 8 modules of the WebDev Lab. You've learned typography, the box model, layouts, media, animations, SEO, advanced CSS, and responsive design. Now go build something!
+      </div>
+
+    </section>
+
+    <!-- PREV / NEXT -->
+    <div class="page-nav">
+      <a href="07-advanced.html" class="page-nav-btn prev">← Module 07: Advanced CSS</a>
+      <a href="../index.html" class="page-nav-btn next">Back to Home →</a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>WebDev Lab — Built for learners, by a learner. Module 08 of 08. 🎉</p>
+  </footer>
+
+</body>
+</html>

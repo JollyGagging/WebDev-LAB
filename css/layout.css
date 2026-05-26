@@ -1,0 +1,370 @@
+/* =========================================
+   LAYOUT, NAV & SHARED COMPONENTS
+   ========================================= */
+
+/* ---- NAV ---- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--ink);
+  border-bottom: 3px solid var(--accent);
+  padding: var(--s3) var(--s6);
+  display: flex;
+  align-items: center;
+  gap: var(--s6);
+  flex-wrap: wrap;
+}
+
+.site-nav .nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--paper);
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-nav .nav-logo span {
+  color: var(--accent);
+}
+
+.site-nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s4);
+}
+
+.site-nav ul li a {
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: var(--s2) var(--s3);
+  border-radius: var(--r-sm);
+  transition: color 0.2s, background 0.2s;
+}
+
+.site-nav ul li a:hover,
+.site-nav ul li a.active {
+  color: var(--paper);
+  background: rgba(255,255,255,0.08);
+  text-decoration: none;
+}
+
+/* ---- PAGE HERO ---- */
+.page-hero {
+  background: var(--ink);
+  color: var(--paper);
+  padding: var(--s9) var(--s6) var(--s8);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 80% 20%, rgba(232,64,28,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(28,111,232,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.page-hero .hero-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  padding: var(--s1) var(--s3);
+  border-radius: var(--r-full);
+  margin-bottom: var(--s4);
+}
+
+.page-hero h1 {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--paper);
+  max-width: 800px;
+  position: relative;
+}
+
+.page-hero h1 em {
+  color: var(--accent);
+  font-style: normal;
+}
+
+.page-hero p {
+  margin-top: var(--s4);
+  font-size: 1.15rem;
+  color: #aaa;
+  max-width: 600px;
+  position: relative;
+}
+
+/* ---- MAIN CONTAINER ---- */
+.lab-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--s7) var(--s6);
+}
+
+/* ---- SECTION HEADER ---- */
+.section-header {
+  margin-bottom: var(--s6);
+  padding-bottom: var(--s4);
+  border-bottom: 2px solid var(--border);
+}
+
+.section-header .section-num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: var(--s2);
+}
+
+.section-header h2 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.section-header p {
+  color: var(--muted);
+  margin-top: var(--s2);
+  font-size: 1rem;
+}
+
+/* ---- LAB CARD ---- */
+.lab-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  margin-bottom: var(--s6);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.25s, border-color 0.25s;
+}
+
+.lab-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+
+.lab-card-header {
+  background: var(--ink);
+  color: var(--paper);
+  padding: var(--s4) var(--s5);
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+
+.lab-card-header .card-icon {
+  font-size: 1.4rem;
+}
+
+.lab-card-header h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--paper);
+  letter-spacing: -0.01em;
+}
+
+.lab-card-header .card-tag {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.1);
+  color: var(--muted);
+  padding: 2px 8px;
+  border-radius: var(--r-full);
+}
+
+.lab-card-body {
+  padding: var(--s5);
+}
+
+/* ---- PRACTICE ZONE ---- */
+.practice-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--r-md);
+  padding: var(--s5);
+  margin: var(--s4) 0;
+  background: #fafaf8;
+  position: relative;
+}
+
+.practice-zone::before {
+  content: '✏️ Practice Zone';
+  position: absolute;
+  top: -11px;
+  left: var(--s4);
+  background: var(--paper);
+  padding: 0 var(--s2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.output-zone {
+  border: 2px solid var(--border);
+  border-radius: var(--r-md);
+  padding: var(--s5);
+  margin: var(--s4) 0;
+  background: #fff;
+  position: relative;
+}
+
+.output-zone::before {
+  content: '👁 Live Result';
+  position: absolute;
+  top: -11px;
+  left: var(--s4);
+  background: var(--paper);
+  padding: 0 var(--s2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent3);
+}
+
+/* ---- INSTRUCTION CALLOUT ---- */
+.callout {
+  display: flex;
+  gap: var(--s3);
+  padding: var(--s4);
+  border-radius: var(--r-md);
+  margin: var(--s4) 0;
+  font-size: 0.93rem;
+}
+
+.callout-info {
+  background: rgba(28,111,232,0.08);
+  border-left: 4px solid var(--accent2);
+  color: #1a3a6e;
+}
+
+.callout-tip {
+  background: rgba(34,197,94,0.08);
+  border-left: 4px solid var(--accent3);
+  color: #14532d;
+}
+
+.callout-warn {
+  background: rgba(232,64,28,0.08);
+  border-left: 4px solid var(--accent);
+  color: #7c1d0d;
+}
+
+.callout-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* ---- TWO COL ---- */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s5);
+}
+
+@media (max-width: 700px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+
+/* ---- BREADCRUMB ---- */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: var(--s6);
+  flex-wrap: wrap;
+}
+
+.breadcrumb a {
+  color: var(--accent2);
+}
+
+.breadcrumb .sep {
+  color: var(--border);
+}
+
+/* ---- PROGRESS BAR ---- */
+.progress-track {
+  display: flex;
+  gap: var(--s2);
+  flex-wrap: wrap;
+  margin: var(--s6) 0;
+}
+
+.progress-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  padding: var(--s2) var(--s3);
+  border-radius: var(--r-full);
+  color: var(--muted);
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.progress-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.progress-chip .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.progress-chip.done .dot { background: var(--accent3); }
+.progress-chip.active .dot { background: var(--accent); }
+.progress-chip.active { border-color: var(--accent); color: var(--accent); }
+
+/* ---- FOOTER ---- */
+.site-footer {
+  background: var(--ink);
+  color: var(--muted);
+  text-align: center;
+  padding: var(--s7) var(--s6);
+  font-size: 0.9rem;
+  border-top: 3px solid var(--accent);
+  margin-top: var(--s9);
+}
+
+.site-footer strong {
+  color: var(--paper);
+}
+
+.site-footer a {
+  color: var(--accent);
+}
