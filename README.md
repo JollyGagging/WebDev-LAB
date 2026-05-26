@@ -7,6 +7,7 @@ Instead of just reading static theory, webdev-lab provides an isolated, live wor
 ---
 
 ## File Structure 
+```
 webdev-lab/
 ├── index.html              ← Home page / module hub
 ├── css/
@@ -22,8 +23,7 @@ webdev-lab/
     ├── 06-seo.html         ← Semantic HTML, meta tags, OG, CLS, accessibility, schema
     ├── 07-advanced.html    ← CSS variables, pseudo-classes/elements, specificity, shapes, scroll snap
     └── 08-responsive.html  ← Media queries, clamp(), viewport units, srcset, container queries
-  ---  
-
+```
 
 ## 🛠️ Deep-Dive Module Breakdown
 
