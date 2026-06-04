@@ -2,7 +2,7 @@
 
 An elegant, highly visual, and comprehensive web development learning toolkit. This repository serves as a hands-on, production-grade sandbox for practically implementing and exploring the core fundamentals of HTML5 and CSS3. It transitions methodically from foundational typography rules to advanced, state-of-the-art browser layout architectures.
 
-Instead of just reading static theory, webdev-lab provides an isolated, live workspace where you can break, experiment with, and master the core visual pillars of the modern web.
+Instead of just reading static theory, webdev-lab provides an isolated, live workspace where you can break, experiment with, and master the core visual pillars of the modern web dev . 
 
 ---
 
